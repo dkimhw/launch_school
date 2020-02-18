@@ -8,17 +8,27 @@ function findFibonacciIndexByLength(digitLength) {
   let secondNumber = 1;
   let i = 2;
   let fibNumber = 0;
+  let maxSafeNumber = Number.MAX_SAFE_INTEGER;
 
   do {
     fibNumber = firstNumber + secondNumber;
-    firstnumber = secondNumber;
+    firstNumber = secondNumber;
     secondNumber = fibNumber;
     i += 1;
-  } while (String(fibNumber).length < digitLength);
 
-  console.log(i);
+    if (fibNumber > maxSafeNumber) {
+      break;
+    }
+  } while (String(fibNumber).length < digitLength)
+
+  if (fibNumber > maxSafeNumber) {
+    console.log("Maxium Integer Value Reached");
+  } else {
+    console.log(i);
+  }
 }
 
 findFibonacciIndexByLength(2);       // 7
 findFibonacciIndexByLength(10);      // 45
 findFibonacciIndexByLength(16);      // 74
+findFibonacciIndexByLength(19);      // 74
