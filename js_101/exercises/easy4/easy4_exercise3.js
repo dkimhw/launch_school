@@ -18,8 +18,11 @@ function whenRetire() {
   console.log("At what age would you like to retire?");
   let userRetirementAge = parseInt(readlineSync.prompt());
 
+  let today = new Date();
+  let currentYear = today.getFullYear();
+
   let yearsToRetirement = userRetirementAge - userAgeInput;
-  console.log(`You will retire in ${2020 + yearsToRetirement}`);
+  console.log(`You will retire in ${currentYear + yearsToRetirement}`);
   console.log(`You have only ${yearsToRetirement} years of work to go!`);
 }
 

@@ -9,7 +9,8 @@ const isPalindrome = (str) => {
 }
 
 function isRealPalindrome(str) {
-  let cleanedStr = str.replace(/\W/gi, '').toLowerCase(); // Do we need to check this regexp
+  // \W leaves the underscore. A short equivalent for [^a-zA-Z0-9] would be [\W_]
+  let cleanedStr = str.replace(/[\W_]+/g, '').toLowerCase(); // Do we need to check this regexp
   return isPalindrome(cleanedStr);
 }
 
@@ -20,3 +21,13 @@ console.log(isRealPalindrome("Madam, I'm Adam"));     // true (only alphanumeric
 console.log(isRealPalindrome('356653'));              // true
 console.log(isRealPalindrome('356a653'));             // true
 console.log(isRealPalindrome('123ab321'));            // false
+
+
+/*
+
+function isRealPalindrome(string) {
+  string = string.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return isPalindrome(string);
+}
+
+*/
