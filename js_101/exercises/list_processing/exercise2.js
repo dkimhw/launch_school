@@ -21,5 +21,5 @@ sort method is a higher order function that can be passed a sorting function as 
 
 In this solution, the callback function passed to sort is the wordSort function.
 
-To perform the word lookups, wordSort uses the 
+To perform the word lookups, wordSort uses the NUMBER_WORDS array defined at the top level. The function performs the comparison by comparing the word equivalent of each number (num1 and num2) accessed through their indices
 */
