@@ -9,18 +9,25 @@
 // ./node_modules/.bin/eslint js_101/lesson_2/calculator/calculator.js
 
 let readline = require('readline-sync');
+let json = require('./calculator_messages.json');
+const LANGUAGE = 'es';
 
 // Create a prompt function - creates a more distinctive output for questions:
-function prompt(msg) {
+function prompt(key) {
+    let msg = messages(key, LANGUAGE);
     console.log(`=> ${msg}`);
 }
 
-prompt("Welcome to Calculator");
+function messages(message, lang='en') {
+    return json[lang][message];
+}
+
+prompt('welcome');
 
 // Set variable outside do block
 while (true) {
     // Ask for the first number
-    prompt("What's the first number?");
+    prompt('first_number');
     let number1 = readline.question();
 
     while (invalidNumber(number1)) {
@@ -29,7 +36,7 @@ while (true) {
     }
 
     // Ask for the second number
-    prompt("What's the second number?");
+    prompt('second_number');
     let number2 = readline.question();
 
     while (invalidNumber(number2)) {
@@ -44,11 +51,11 @@ while (true) {
     }
 
     // Ask for operation to perform
-    prompt("What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide");
+    prompt('operation_question');
     let operation = readline.question();
 
     while (!['1', '2', '3', '4'].includes(operation)) {
-        prompt("Must choose 1, 2, 3, or 4");
+        prompt("wrong_user_input");
         operation = readline.question();
     }
 
@@ -73,10 +80,10 @@ while (true) {
             break;
     }
 
-    prompt(`The result is: ${output}`);
+    console.log(`=> The result is: ${output}`);
 
     // Ask user if they want to do another calculation
-    prompt(`Do you want to do another calculation? Type "yes"`);
+    prompt('another_op');
     let repeatCalc = readline.question();
 
     if (repeatCalc !== 'yes') break;
