@@ -66,4 +66,44 @@ The passed in object is unchanged and looks like we are back in pass by value wo
 
 ### What JavaScript does
 
-1. When you pass primitive values to functions - you can treat JavaScript like pass by value. No operation performed on a primitive value can permanently alter the value. In other words, when you pass a primitive value to a function, no matter what that function does with that value, you will not be able to see the effects by inspecting the variable that you passed to the function
+1. When you pass primitive values to functions - you can treat JavaScript like pass by value. No operation performed on a primitive value can permanently alter the value. In other words, when you pass a primitive value to a function, no matter what that function does with that value, you will not be able to see the effects by inspecting the variable that you passed to the function:
+
+```javascript
+function cap(name) {
+  name.toUpperCase();
+}
+
+let myName = 'naveed';
+cap(myName);
+console.log(myName); // => 'naveed' - remains unchanged
+```
+
+* The reason for the above results is that primitive values like string are immutable.
+
+2. More complicated with objects. With objects, JavaScript exhibits a combination of behaviors from both pass by reference as well as pass by value. When an operation within the function mutates its argument - it affects the original object.
+
+* Functions and methods that mutate their callers are destructive functions like `push`:
+
+```javascript
+function addNames(arr, name) {
+  arr.push(name);
+}
+
+let names = ['bob', 'kim'];
+addNames(names, 'jim');
+console.log(names); // [ 'bob', 'kim', 'jim' ]
+```
+
+* Other functions are non-destructive:
+
+```javascript
+function addName(arr, name) {
+  arr = arr.concat([name]);
+}
+
+let names = ['bob', 'kim'];
+addName(names, 'jim');
+console.log(names); // ['bob', 'kim']
+```
+
+Review: https://launchschool.com/books/javascript/read/more_stuff#variablesaspointers
