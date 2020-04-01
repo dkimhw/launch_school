@@ -15,7 +15,7 @@ function isValidLoanDurationAndAmount(input) {
 
 function yesOrNo(input) {
     let inputLowercase = input.toLowerCase();
-    return (inputLowercase === 'y' || inputLowercase === 'n')
+    return (inputLowercase === 'y' || inputLowercase === 'n');
 }
 
 function getUserInput(inputQuestion, validationFunction) {
@@ -66,17 +66,13 @@ function displayMonthlyPayment(payment) {
 
 while (true) {
     displayIntro();
-    
+
     let loanAmount = Number(getUserInput("What is the loan amount?", isValidLoanDurationAndAmount));
-    console.log(loanAmount);
-    
     let apr = Number(getUserInput(`What is the Annual Percentage Rate (APR)? Type, 
     for instance, 3 for 3% or 3.5 for 3.5%`, isValidAPR));
-    
     let loanDurationMonths =  Number(getUserInput("What is the loan duration in months?", isValidLoanDurationAndAmount));
-    
     let payment = monthlyPayment(apr, loanAmount, loanDurationMonths);
-    
+
     displayMonthlyPayment(payment);
 
     let repeatCalc = getUserInput("Do you want to do another calculation? (y/n)", yesOrNo);
