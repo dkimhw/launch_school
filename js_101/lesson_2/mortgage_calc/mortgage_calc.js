@@ -18,10 +18,6 @@ function yesOrNo(input) {
     return (inputLowercase === 'y' || inputLowercase === 'n')
 }
 
-// Asks user for a input and validates the input
-// Takes a string that is outputted into console
-// Also takes in a validation function to validate whether a user inputted a correct value
-// The validation function must return "true" if the input meets the right conditions specified within that function
 function getUserInput(inputQuestion, validationFunction) {
     let input;
     while (true) {
