@@ -152,3 +152,244 @@ while (true) {
   if (answer.toLowerCase() === 'n') break;
 }
 ```
+
+### 13. Using new lines to organize code
+
+Just as writes use paragraphs to organize related sentences, we also need to learn to organize chunks of code to make it easier to read.
+
+Here is a example of bad use of lines:
+
+```javascript
+// bad
+
+const readline = require('readline-sync');
+let name = '';
+console.log('Enter your name');
+name = readline.question();
+while (name.trim() === '') {
+  name = readline.question();
+  console.log("That's an invalid name. Try again:");
+}
+console.log(`Welcome ${name}!`);
+console.log("What would you like to do?");
+```
+
+Good:
+
+```javascript
+// better
+
+const readline = require('readline-sync');
+let name = '';
+
+console.log('Enter your name');
+name = readline.question();
+
+while (name.trim() === '') {
+  name = readline.question();
+  console.log("That's an invalid name. Try again:");
+}
+
+console.log(`Welcome ${name}!`);
+console.log("What would you like to do?");
+```
+
+* You can see through newlines that this small code snippet has 4 parts:
+  * constant and variable declaration and initialization
+  * initial user input
+  * input validation
+  * using the variable
+
+### 14. Should a function return or display?
+
+Understand whether a function returns a values or has side effects, or both.
+
+What is side effects? It means the function is either outputting something or mutating an object. 
+
+Example:
+
+```javascript
+// side effect: logs output to the console
+// returns: undefined
+
+function total(num1, num2) {
+  console.log(num1 + num2);
+}
+
+// side effect: mutates the passed-in array
+// returns: updated array
+
+function append(targetArr, valueToAppend) {
+  targetArr.push(valueToAppend);
+  return targetArr;
+}
+```
+
+No side-effects example:
+
+```javascript
+// side effect: none
+// returns: a new number
+
+function total(num1, num2) {
+  return num1 + num2;
+}
+```
+
+In general, if a function or method has both side effects and a meaningful return value, it is a red flag. Try to avoid writing functions that do that - as it will be challenging to use them in the future.
+
+### 15. Name functions appropriately
+
+One way to help yourself remember what each function does is to choose good function names. If you have some functions that output values - then preface those functions with `display` or `print`.
+
+For example, if you see a function named `printTotal` - you can be sure it will output a total and not return anything. 
+
+If you find yourself looking at a function's implementation every time you use it - it's a sign that the function needs to be improved.
+
+Two major bits of advice:
+
+1. A function should do one thing. Don't write a function that does more than one of these things: mutate value, output something, return a meaningful value
+2. It should be named appropriately.  
+
+### 16. Don't mutate the caller during iteration
+
+Take a look at this code:
+
+```javascript
+let words = ['scooby', 'do', 'on', 'channel', 'two'];
+
+words.forEach(word => {
+  console.log(word);
+  words.shift();
+});
+```
+The `shift` method removes the first element of an array. Since we are iterating through the array and calling `shift` in each iteration, we expect all elements to be removed by the end of the iteration. However, let's log the words array after the iteration to see whether that is indeed what happens:
+
+```javascript
+let words = ['scooby', 'do', 'on', 'channel', 'two'];
+
+words.forEach(word => {
+  console.log(word);
+  words.shift();
+});
+
+console.log(words); // logs ['channel', 'two']
+```
+
+That is very strange -- shouldn't every element be deleted? We are expecting an empty array, but the final value is `['channel', 'two']` which may result in some confusion. The lesson here is: `Don't mutate a collection while iterating through it.`
+
+You can mutate the individual elements within that collection, just not the collection itself. 
+
+```javascript
+let pairs = [[6, 'scooby'], [2, 'do'], [2, 'on'], [7, 'channel'], [3, 'two']];
+
+pairs.forEach(pair => {
+  pair.shift();
+});
+
+console.log(pairs); // logs [['scooby'], ['do'], ['on'], ['channel'], ['two']];
+```
+
+### 17. Variable shadowing
+
+Variable shadowing occurs when you choose a local variable in an inner scope that shares. It is easy to make this mistake; it essentially prevents you from accessing the outer scope variable from an inner scope. 
+
+Example of variable shadowing:
+
+```javascript
+let name = 'johnson';
+
+['kim', 'joe', 'sam'].forEach(name => {
+  // uh-oh, we cannot access the outer scoped "name"!
+  console.log(`${name} ${name}`);
+});
+
+// kim kim
+// joe joe
+// sam sam
+```
+
+The problem is that we have shadowed the outer scoped `name` variable. Within the `forEach` callback function, the `name` variable represents the elements in the array - `"kim"`, `"joe"`, or `"sam"`.
+
+Note that the following is not variable shadowing:
+
+```javascript
+let name = 'johnson';
+
+['kim', 'joe', 'sam'].forEach(fname => {
+  name = fname;
+});
+```
+
+The above code is accessing the `name` variable from the outer scope and re-assigning it. After the `forEach` method runs, the name will be set to `'sam'` at the end.
+
+Be careful about choosing appropriate variable names when working with callback functions. If you pick a name that is identical to an outer scope variable. 
+
+ESLint will catch this error for you.
+
+### 18. Don't use assignment in a conditional
+
+The reason is that it's never super clear whether you meant to user `==`, `===`, or `=`. Because it could have been a simple typo.
+
+You want your code to always avoid being implicit.
+
+```javascript
+// bad
+let someVariable;
+
+if (someVariable = getAValueFromSomewhere()) {
+  console.log(someVariable);
+}
+
+// good
+
+let someVariable = getAValueFromSomewhere();
+
+if (someVariable) {
+  console.log(someVariable);
+}
+```
+
+The first `if` statement works but it is confusing and when you are reading this code - you are not 100% confident it's  a bug or intentional.
+
+
+### 19. Use underscore for unused callback parameters
+
+Suppose you have an array of names and you want to print out a string for every name in the array but you don't care about the actual values/names. In those situations, you can use an underscore to signify that we do not care about this particular callback parameters
+
+```javascript
+let names = ['kim', 'joe', 'sam'];
+names.forEach(_ => {
+  console.log('Got a name!')
+});
+
+// Got a name!
+// Got a name!
+// Got a name!
+```
+
+Another example is when you need the second parameter but you do not need the first one. 
+
+```javascript
+let names = ['kim', 'joe', 'sam'];
+names.forEach((_, index) => {
+  console.log(`${index + 1}: got a name!`);
+});
+
+// logs
+// => 1: Got a name!
+// => 2: Got a name!
+// => 3: Got a name!
+```
+
+### 20. Gain experience through struggling
+
+The final tip in this assignment is about dealing with struggling. There are two things that beginners feel at this stage:
+
+* that they must know the "best" or "right" way to do something, so they feel they must learn "best practice."
+* that they waste too much time debugging and not doing things correctly the first time
+
+To the first point: it's less impactful to learn "best practices" without first learning why they are best practices. That leads to the second point, which is that you must learn to be ok with struggling through the "bad" or sub-optimal practices first. That's not wasting time, that's getting experience. Becoming a good developer means experiencing and solving a lot of weird issues.
+
+We can't say this enough: spend time programming. Learn to debug problems, struggle with them, search for the right terms, play around with the code, and you'll be able to transform into a professional developer. That's what professional developers do every day.
+

@@ -82,6 +82,15 @@ Understanding the problem
     * 1, 3, 5, 3, 1
     * prepend number of spaces: 2, 1, 0, 1, 2
     * Join together with \n, or lopp and print
+* Data Structures:
+  * Number
+* Algorithm:
+  * From an odd number - 2a + 1
+    * generate an array [1, 3, ... 2a+1, ..., 3, 1]
+    * generate an array [a, a-1, ...., 1, 0, 1, a]
+  * Loop through the two arrays at the same time.
+    * For each iteration, print out x of number * prepended by y
+    * y * " " + x * "*"
 
 Test Cases:
 
@@ -121,6 +130,13 @@ New centuries being in years that end with 01. So, the years 1901-2000 comprise 
       * 1, 2, 3: st, nd, rd
       * 0, 4-9: th
     * except for 11, 12, 13: th
+* Data Structures:
+  * input: number
+  * rules: as data or logic/code?
+* Algorithms:
+  * Century number = (year - 1) / 100
+  * Century string = century number to string, then apply suffix rules
+
 
 Examples / Test Cases:
 
@@ -161,7 +177,14 @@ Understanding the problem
 * Edgecases to test?
 * Data Structures
   * Input - working in array probably the easiest since we need to loop through each character in the string
-  * Hash/Object to create a mapping for letters and score 
+  * Hash/Object to create a mapping for letters and score
+* Algorithms
+  * Split the input into array of chars
+  * Map to lower cased chars
+  * Map each char into its scrabble score, referencing the look up table
+  * Sum up the values or reduce with summing up the values (reduce function)
+
+Now you can code up the function pretty quickly since you have a complete outline to reference from.
 
 **Understanding the problem:**
 
@@ -234,35 +257,39 @@ Algorithms:
 * apply arithmetic operations based on key phrases
 
 ### Algorithm
-  - Algorithms have to be described in the language of chosen data structure!
-    - "then solve it" doesn't count
-  - Have to be really fluent with
-    - String / Regex
-    - Array
-      - Ruby: Enumerable
-      - JavaScript: Higher Order Functions
-    - Hash / Object
-      - Creation (default values)
-      - Access (default values)
-      - Iteration
-  - verify your algorithm with your examples / test cases
+  * Algorithms have to be described in the language of chosen data structure! This is why the data structure is so important. The types of functions/methods that you can use varies
+    * "then solve it" doesn't count
+  * Have to be really fluent with
+    * String / Regex (Regex is a must - practice with javascript)
+    * Array
+      * JavaScript: Higher Order Functions
+      * Knowning major functions like: `map`, `filter`, `split`
+      * These methods allow you to simplify the code you have to right
+        * If you didn't know the `split` function you will have to say I will need to loop thorugh each character in the string which can take you longer.
+    * Hash / Object
+      * Creation (default values)
+      * Access (default values)
+      * Iteration
+  * Verify your algorithm with your examples / test cases
 
-Abstraction
-  - Very important, rely on language built in abstractions: String/Regex, Array, Hash/Object
-  - Avoid solving big problems!
-    - Always, always, break bigger problems into smaller problems
-    - Don't try to walk through a wall
-  - lay out the general steps of an algorithm, without having to go to details
-    - Try to solve a problem in 1-2 sentences!!!
-    - If you can't, raise your abstraction
-      - create helper methods/functions
-      - push detailed steps to methods/functions
+### Abstraction
+  * Very important, rely on language built in abstractions: String/Regex, Array, Hash/Object
+  * Avoid solving big problems!
+    * Always, always, break bigger problems into smaller problems
+    * Don't try to walk through a wall - you want to step back and think about breaking the problem down piece by piece. One framework is to take the big logic break it and build out helper functions for these smaller logic pieces
+  * Lay out the general steps of an algorithm, without having to go into details (not sure if I agree with this - I think understand the problem step is the right process to follow first)
+    * Try to solve a problem in 1-2 sentences!!!
+    * If you can't, raise your abstraction
+      * Create helper methods/functions
+      * Push detailed steps to methods/functions
 
 Interview Tips
-  - Communicative
-  - Getting to a working solution >> no solution
-  - De-risking
-    - Check your building blocks
-      - run code often
-      - debug locally
-  - Manage your energy
+  * Communicative
+  * Getting to a working solution >> no solution (there is no need to use fancy tricks). Keep it simple and get to a working solution even if it's not the most optimal problem
+  * De-risking (the worst part is going in the wrong direction or not understanding the problem correctly and getting to a completely wrong solution)
+    * Check your building blocks
+      * Run code often --> as you break down the problem - you can test the individual helper functions
+      * Debug locally
+  * Manage your energy
+    * Tackle the hardest part by understanding the problem and understanding the algorithm to write to solve that hard part
+    * Then you can use the outline to code up quickly
