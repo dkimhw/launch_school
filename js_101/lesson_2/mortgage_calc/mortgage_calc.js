@@ -80,7 +80,7 @@ while (true) {
     console.log(repeatCalc);
     console.clear();
 
-    if (repeatCalc !== 'y') {
+    if (repeatCalc.toLowerCase() !== 'y') {
         break;
     }
 }
