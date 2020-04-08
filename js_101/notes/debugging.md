@@ -127,3 +127,5 @@ The process centers around using some object, like a rubber duck, as a sounding 
 3. Inspecting with a Debugger
 
 Pretty awkward tool apparently. Easier to strategically add console.log
+
+4. Walking away from the problem (doing something different)

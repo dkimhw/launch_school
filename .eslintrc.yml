@@ -1,4 +1,4 @@
-# Last update: 11 Feb 2020
+# Last update: 22 Mar 2020
 root: true
 parser: babel-eslint
 parserOptions:
@@ -28,48 +28,53 @@ rules:
   arrow-spacing: error
   block-scoped-var: error
   brace-style:
-  - error
-  - 1tbs
-  - allowSingleLine: true
+    - error
+    - 1tbs
+    - allowSingleLine: true
   camelcase: error
   complexity: error
   consistent-return: error
   constructor-super: error
   eqeqeq: error
   id-length:
-  - error
-  - exceptions:
-    - _
-    - a
-    - b
-    - x
-    - y
-    - z
-    min: 2
+    - error
+    - exceptions:
+      - _
+      - a
+      - b
+      - x
+      - y
+      - z
+      min: 2
+      properties: never
+  indent:
+    - error
+    - 2
+    - SwitchCase: 1
   keyword-spacing: error
   linebreak-style: error
   max-depth: error
   max-len:
-  - error
-  - code: 80
-    tabWidth: 2
-    ignoreRegExpLiterals: false
-    ignoreStrings: true
-    ignoreTemplateLiterals: true
-    ignoreTrailingComments: true
-    ignoreUrls: true
+    - error
+    - code: 80
+      tabWidth: 2
+      ignoreRegExpLiterals: false
+      ignoreStrings: true
+      ignoreTemplateLiterals: true
+      ignoreTrailingComments: true
+      ignoreUrls: true
   max-lines-per-function:
-  - error
-  - max: 20
-    skipBlankLines: true
-    skipComments: true
+    - error
+    - max: 20
+      skipBlankLines: true
+      skipComments: true
   max-nested-callbacks:
-  - error
-  - max: 4
+    - error
+    - max: 4
   max-statements:
-  - error
-  - max: 15
-  - ignoreTopLevelFunctions: true
+    - error
+    - max: 15
+    - ignoreTopLevelFunctions: true
   max-statements-per-line: error
   new-parens: error
   no-array-constructor: error
@@ -79,13 +84,13 @@ rules:
   no-caller: error
   no-class-assign: error
   no-confusing-arrow:
-  - error
-  - allowParens: true
+    - error
+    - allowParens: true
   no-console: 'off'
   no-const-assign: error
   no-constant-condition:
-  - error
-  - checkLoops: false
+    - error
+    - checkLoops: false
   no-debugger: 'off'
   no-dupe-class-members: error
   no-duplicate-imports: error
@@ -95,8 +100,8 @@ rules:
   no-implicit-globals: error
   no-implied-eval: error
   no-inner-declarations:
-  - error
-  - both
+    - error
+    - both
   no-iterator: error
   no-label-var: error
   no-lonely-if: error
@@ -118,15 +123,15 @@ rules:
   no-process-exit: error
   no-prototype-builtins: 'off'
   no-restricted-syntax:
-  - error
-  - message: Do not use `with` statement.
-    selector: WithStatement
+    - error
+    - message: Do not use `with` statement.
+      selector: WithStatement
   no-return-assign: error
   no-return-await: error
   no-script-url: error
   no-self-assign:
-  - error
-  - props: true
+    - error
+    - props: true
   no-self-compare: error
   no-sequences: error
   no-shadow-restricted-names: error
@@ -139,42 +144,41 @@ rules:
   no-unneeded-ternary: error
   no-unused-expressions: error
   no-unused-vars:
-  - error
-  - args: all
-    argsIgnorePattern: "^_"
-    caughtErrors: all
-    caughtErrorsIgnorePattern: "^_"
-    vars: local
+    - error
+    - args: all
+      argsIgnorePattern: "^_"
+      caughtErrors: all
+      caughtErrorsIgnorePattern: "^_"
+      vars: local
   no-use-before-define:
-  - error
-  - functions: false
+    - error
+    - functions: false
   no-useless-call: error
   no-useless-catch: error
   no-useless-computed-key: error
   no-useless-rename: error
   no-useless-return: error
-  no-var: error
   no-with: error
   nonblock-statement-body-position: error
   one-var-declaration-per-line: error
   operator-assignment: error
   prefer-promise-reject-errors: error
   quote-props:
-  - error
-  - consistent-as-needed
+    - error
+    - consistent-as-needed
   radix: error
   require-await: error
   require-yield: error
   semi:
-  - error
-  - always
-  - omitLastInOneLineBlock: true
+    - error
+    - always
+    - omitLastInOneLineBlock: true
   semi-spacing: error
   semi-style: error
   space-before-blocks: error
   space-infix-ops: error
   space-unary-ops:
-  - error
-  - words: true
-    nonwords: false
+    - error
+    - words: true
+      nonwords: false
   vars-on-top: error
