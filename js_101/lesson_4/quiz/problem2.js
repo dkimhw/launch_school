@@ -16,3 +16,4 @@ letters[0] = letters[0].toUpperCase();
 dog = letters.join('');
 
 console.log(dog);
+
