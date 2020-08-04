@@ -85,3 +85,11 @@ function shuffle(array) {
 
 5. Comparison
     * If no one busts, compare the values and declare winner
+
+6. Improvement - call `total()` less
+    * We can cache (memoization) each player's total in a local variable within the main loop and refer to those local variables instead
+    * Specifically in my program that means adjusting:
+        * `startOneRoundOfGame`
+        * `playerTurn`
+        * `dealerTurn`
+        * `isBust`
