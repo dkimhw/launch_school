@@ -37,7 +37,6 @@ let shuffle = (array) => {
 let userGameInput = () => {
   let validInputs = ['hit', 'stay'];
 
-  // validate user input
   while (true) {
     let readline = require('readline-sync');
     let userInput = readline.question();
@@ -74,7 +73,6 @@ let joinOr = (arr, delimiter = ', ', word = 'or') => {
   }
 };
 
-// Need to modify for objects
 let total = (hand) => {
   let values = hand.map(card => Object.keys(card)[0]);
 
@@ -101,7 +99,6 @@ let isBust = (total) => {
   return total > MAX_VALUE;
 };
 
-// Make it more comprehensive
 let recommendationToPlayer = (total) => {
   if (total >= 16) {
     return 'stay';
