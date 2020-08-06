@@ -93,3 +93,48 @@ function shuffle(array) {
         * `playerTurn`
         * `dealerTurn`
         * `isBust`
+
+
+### Feedback
+
+1. From a user experience perspective, it would be better if the cards had suits (FIXED):
+    * `4s` or `Qd` as examples
+
+2. Another improvement (FIXED):
+    * Inputs should be case insensitive ("HIT" should be valid as well)
+    * You could also allow one letter responses as well
+
+3. Data structure improvements (FIXED) - much, much better:
+    * Take a look at this code: `Object.keys(card)[0]);`
+        * It requires me to know `0` represents the value of the card
+    * Better:
+        * `{suit: 'hearts', value: '3'}`
+        * `card.value` --> much easier to read and interpret
+
+4. Instead of comment `correct` for `aces` - extract this logic into a separte function (FIXED)
+
+5. Instead of having two: `displayPlayerHand` and `displayDealerHand` - you could have just one function `displayHand`
+
+6. `playerTurn` does too many things:
+    * `displayDealerHand` function call doesn't really belong in `playerTurn` logic - so you should remove it.
+
+```javascript
+function playerTurn(deck, hand, playerTotal) {
+  while (true) {
+    displayPlayerHand(hand, playerTotal);
+    if (isBust(playerTotal)) break;
+    let answer = getHitStayAnswer();
+    if (isHit(answer)) {
+      dealPlayerACard(deck, hand);
+      playerTotal = total(hand);
+      displayDrawnCard(hand);
+      if (isBust(playerTotal)) {
+        displayBust(playerTotal);
+        break;
+      }
+    } else {
+      break;
+    }
+  }
+}
+```

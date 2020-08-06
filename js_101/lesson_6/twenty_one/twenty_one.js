@@ -18,7 +18,8 @@ let initializeDeck = () => {
   CARD_VALUES.forEach(val => {
     SUITS.forEach(suit => {
       let card = {};
-      card[val] = suit;
+      card['suit'] = suit;
+      card['value'] = val;
 
       deck.push(card);
     });
@@ -35,16 +36,17 @@ let shuffle = (array) => {
 };
 
 let userGameInput = () => {
-  let validInputs = ['hit', 'stay'];
+  let validInputs = ['hit', 'stay', 'h', 's'];
+  prompt("Choose either to 'hit' or 'stay'\n");
 
   while (true) {
     let readline = require('readline-sync');
-    let userInput = readline.question();
+    let userInput = readline.question().toLowerCase();
 
     if (validInputs.includes(userInput)) {
-      return userInput;
+      return userInput[0]; // take the first char only
     } else {
-      prompt("Not a valid input - please choose from 'hit' or 'stay'.");
+      prompt("Not a valid input - please choose from 'hit' or 'h' or 'stay' or 's'.");
     }
   }
 };
@@ -73,8 +75,18 @@ let joinOr = (arr, delimiter = ', ', word = 'or') => {
   }
 };
 
+let correctForAce = (hand, currentSum) => {
+  let finalScore = currentSum;
+
+  hand.filter(value => value === "A").forEach(_ => {
+    if (finalScore > MAX_VALUE) finalScore -= 10;
+  });
+
+  return finalScore;
+};
+
 let total = (hand) => {
-  let values = hand.map(card => Object.keys(card)[0]);
+  let values = hand.map(card => card.value);
 
   let sum = 0;
   values.forEach(value => {
@@ -87,12 +99,7 @@ let total = (hand) => {
     }
   });
 
-  // correct for aces
-  values.filter(value => value === "A").forEach(_ => {
-    if (sum > MAX_VALUE) sum -= 10;
-  });
-
-  return sum;
+  return correctForAce(values, sum);
 };
 
 let isBust = (total) => {
@@ -114,7 +121,7 @@ let displayDealerHand = (hand) => {
     if (index === 1) {
       continue;
     } else {
-      displayCardsArr.push(Object.keys(hand[index])[0]);
+      displayCardsArr.push(hand[index].value + hand[index].suit);
     }
   }
 
@@ -125,7 +132,7 @@ let displayPlayerHand = (hand, total) => {
   let displayCardsArr = [];
 
   hand.forEach(el => {
-    displayCardsArr.push(Object.keys(el)[0]);
+    displayCardsArr.push(el.value + el.suit);
   });
 
   prompt(`You have: ${joinOr(displayCardsArr, ", ", "and")}`);
@@ -156,7 +163,7 @@ let displayFinalResult = (playerFinalScore, dealerFinalScore) => {
   } else if (winner === null) {
     prompt(`It's a tie! Player's hand: ${playerFinalScore}; Dealer's hand: ${dealerFinalScore}.`);
   } else {
-    prompt(`Dealer wins! Player's hand: ${playerFinalScore}; Dealer's hanbd: ${dealerFinalScore}.`);
+    prompt(`Dealer wins! Player's hand: ${playerFinalScore}; Dealer's hand: ${dealerFinalScore}.`);
   }
 };
 
@@ -178,43 +185,45 @@ let displayBust = (total, currentPlayer) => {
   }
 };
 
-let playerTurn = (deck, playerHand, dealerHand, playerTotal) => {
-  displayDealerHand(dealerHand);
+let displayDrawCard = (hand, currentPlayer, total) => {
+  prompt(`${currentPlayer} drew ${hand[hand.length - 1].value + hand[hand.length - 1].suit} - total is now: ${total}`);
+};
 
+let isHit = (answer) => {
+  return answer === 'h';
+}
+
+let playerTurn = (deck, playerHand, dealerHand, playerTotal) => {
   while (true) {
     displayPlayerHand(playerHand, playerTotal);
+    if (isBust(playerTotal)) break;
 
-    prompt("Choose either to 'hit' or 'stay'\n");
     let userInput = userGameInput();
-
-    if (userInput === "stay" || isBust(playerTotal)) {
-      break;
-    } else if (userInput === "hit") {
+    if (isHit(userInput)) {
       hit(deck, playerHand);
       playerTotal = total(playerHand);
-      prompt(`Player drew ${Object.keys(playerHand[playerHand.length - 1])[0]} - total is now: ${playerTotal}`);
-      if (isBust(playerTotal)) break;
+
+      displayDrawCard(playerHand, 'Player', playerTotal);
+      if (isBust(playerTotal)) displayBust(playerTotal, 'Player');
+      break;
+    } else {
+      break;
     }
   }
-
-  displayBust(playerTotal, 'Player');
 };
 
 let dealerTurn = (deck, dealerHand, dealerTotal) => {
   while (true) {
+    if (isBust(dealerTotal)) displayBust(dealerTotal, 'Dealer');
+
     if (dealerTotal < DEALER_MIN_VALUE) {
       hit(deck, dealerHand);
       dealerTotal = total(dealerHand); // update the total - new card added
-
-      prompt(`Dealer drew ${Object.keys(dealerHand[dealerHand.length - 1])[0]} - total is now: ${dealerTotal}.`);
-
-      if (isBust(dealerTotal)) break;
+      displayDrawCard(dealerHand, 'Dealer', dealerTotal);
     } else if (dealerTotal >= DEALER_MIN_VALUE) {
       break;
     }
   }
-
-  displayBust(dealerTotal, 'Dealer');
 };
 
 let displayWelcome = () => {
@@ -242,16 +251,17 @@ let startOneRoundOfGame = (deck, score) => {
   let playerTotal = total(playerHand);
   let dealerTotal = total(dealerHand);
 
+  displayDealerHand(dealerHand); // To see what the dealer has during player turn
   playerTurn(deck, playerHand, dealerHand, playerTotal);
   playerTotal = total(playerHand); // Update again before checking for bust
 
   if (isBust(playerTotal)) {
     updateScore(score, 'Dealer');
     return;
-  }
+  } 
 
   dealerTurn(deck, dealerHand, dealerTotal);
-  dealerTotal = total(dealerHand);
+  dealerTotal = total(dealerHand); // Update again before checking for bust
 
   if (isBust(dealerTotal)) {
     updateScore(score, 'Player');
