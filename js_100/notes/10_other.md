@@ -34,8 +34,6 @@ c // [3, 4]
 d // [1, 2]
 ```
 
-This is different from what Java does. In Java, c & d would be the same. The two variables return different arrays.
-
 This code works like this because the reassignment does not mutate the variable to the left of the assignment operator. Instead, it changes the variable in such a way that it refers to the array on the right. Each variable has a value and reassigning values does not affect any other variables that happen to have the same value. 
 
 **Does that mean that arrays and other objects get stored directly inside variables like primitives?**

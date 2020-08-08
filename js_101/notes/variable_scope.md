@@ -65,7 +65,7 @@ console.log(a); // ReferenceError: a is not defined
 
 **Deep Dive into Function Scope**
 
-* Note that a local variable only comes into existence when you call that function. There mere act of defining a function doesn't create any variables. 
+* Note that a local variable only comes into existence when you call that function. The mere act of defining a function doesn't create any variables. 
 * The function declaration does define the scope of the variables. When `aFunc` gets invoked, `a` will be created and accessible but immediately discarded once the function executes and returns to the main flow of the program
 * We say `a` is in scope within `aFunc`.
 
@@ -157,10 +157,10 @@ Variable shadowing is also not limited to callback functions. Whenever you have 
 let a = 1;
 
 function doit(a) {
-  console.log(a); // => 3
+  console.log(a); 
 }
 
-doit(3);
+doit(3); // => 3
 console.log(a); // => 1
 ```
 

@@ -20,12 +20,12 @@ This function allows us to not write `console.log` everytime we want to print so
 
 It also makes it more maintainable because now you only need to make changes to one place.
 
-You can also provide functions will optional values called arguments. Arguments let you pass data from outside the function's scope into the function so it can access the data. If the function doesn't need additional data from outside, no arguments are necessary.
+You can also provide functions with optional values called arguments. Arguments let you pass data from outside the function's scope into the function so it can access the data. If the function doesn't need additional data from outside, no arguments are necessary.
 
 You can name arguments whatever you want but again it should be concise and meaningful. You cannot reference arguments outside of the function.
 
 Some useful terminologies and information:
-  * When you are invoking a function - it's the say as calling a function (using the function).
+  * When you are invoking a function - it's the same as calling a function (using the function).
   * The local variable names between parenthesis are called parameters
   * Arguments are the values you pass into the function for each of those parameters.
 

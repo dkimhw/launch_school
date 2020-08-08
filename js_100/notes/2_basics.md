@@ -228,7 +228,7 @@ You can also use `parseInt`:
 console.log(parseInt('12')); // 12
 ```
 
-One interesting feature of `parseInt` is that it always returns a number when the first character oft he string value is a digit or the first two characters are a sign (+ or -) and a digit
+One interesting feature of `parseInt` is that it always returns a number when the first character of the string value is a digit or the first two characters are a sign (+ or -) and a digit
 
 ```javascript
 console.log(parseInt('12xyz')); // 12
