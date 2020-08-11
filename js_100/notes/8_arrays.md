@@ -4,7 +4,7 @@
 
 ### What is an Array?
 
-* Order list of elements; each element has a unique index number that you can use to access the element
+* Ordered list of elements; each element has a unique index number that you can use to access the element
 * Zero-indexed
 * Can contain different data types including objects
 * Length is the highest position that has a value plus 1
@@ -98,7 +98,7 @@ console.log(deletedElements); // [ 10, 'a']
 
 #### Iterating With `forEach`
 
-* `forEach` iterates over the elements in the array and invokes the callback function for each element. It passes the element's value tot he callback function.
+* `forEach` iterates over the elements in the array and invokes the callback function for each element. It passes the element's value to the callback function.
 * A callback function is a function that you pass to another function as an argument. The called function subsequently invokes the callback function at certain times while it runs.
 
 ```javascript

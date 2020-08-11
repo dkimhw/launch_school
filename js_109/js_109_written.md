@@ -1038,6 +1038,41 @@
     * **truthy**: refers to values that evaluates as true.
       * Not the same thing as being actually `false`
 
+  * Notice that we use "evaluates as false" or "evaluates as true". Saying that an expression returns `true` or `false` is not the same as saying that it returns a truthy or falsy value, or that it evaluates as true or false. The terms true and false refer to the Boolean values `true` and `false`. 
+
+  * Truthiness means that we can use any condition or logical expression because JavaScript considers any non-zero (and non-NaN) numbers to be truthy. It does not mean that `num` is equal to `true`:
+
+    ```javascript
+  let num = 5;
+    // num "evalutes as true"
+  if (num) {
+      console.log("valid number");
+    } else {
+      console.log("error!");
+    }
+    
+    // Just because num evaluates as true, it does not mean it is `true`
+    console.log(num === true); // false
+    ```
+    
+
+    
+  * The use of truthy and falsy values leads to some surprising code:
+
+    ```javascript
+  let name;
+    if (name = getNameFromUser()) {
+    console.log(`Hi ${name}`);
+    } else {
+      console.log("you must enter your name!");
+    }
+    ```
+    
+    
+    
+    * `getNameFromUser` solicits and returns the user's name and returns an empty string if the user does not enter a name. Since an empty string is falsy - we can test for a missing name by evaluating the assignment `name = getNameFromuser()` - if the user did not enter her name the expression evaluates as false, and the code logs `you must enter your name!`
+    * This is discouraged however.
+
   * Any value can in JavaScript can be coerced into a boolean value which is why you don't always need an expression that evaluates to true or false.
 
     * For example: `if` statement does not need something like `5 === 5`. Thus, you can use **any** expression in a conditional statement.
@@ -1267,9 +1302,414 @@
 
 * Functions vs Methods (Invocation)
 
+  * **Definitions:**
+
+    * A method is a function that belongs to a class/object - it needs the instance of the object/class followed by the method name invocation
+      * Methods have access to data associated within the class
+      * A method is implicitly passed the object on which it was called
+    * Function is a piece of code that you can call directly by name - all data that is passed to a function is explicitly passed
+
+  * We have seen:
+
+    ```javascript
+    function add(a, b) {
+      return a + b;
+    }
+    ```
+
+    
+
+  * There is a different syntax for calling methods called "method invocation":
+
+    ```javascript
+    'xyxxy'.toUpperCase();
+    ```
+
+    
+
+  * There is no easy way to determine whether you need to use a function or method call for any given function - you need to read the documentation or commit common methods to memory.
+
+* What is mutating the caller?
+
+  * A method can permanently alter the object that invokes the method (otherwise known as mutating the calller).
+  
+  * This is an example of a non-mutating method - leaves the caller unchanged:
+  
+    ```javascript
+    let name = 'David';
+    console.log(name.toUpperCase());
+    console.log(name);
+    ```
+  
+    
+  
+  * Some methods do mutate the caller as shown below:
+  
+    ```javascript
+    let oddNumbers = [1, 3, 5, 7, 9];
+    oddNumbers.pop();
+    console.log(oddNumbers);
+    ```
+  
+    
+  
+  * Functions can also mutate their arguments:
+  
+    ```javascript
+    function changeFirstElement(array) {
+      array[0] = 9;
+    }
+    
+    let oneToFive = [1, 2, 3, 4, 5];
+    changeFirstElement(oneToFive);
+    console.log(oneToFive); // prints [9, 2, 3, 4, 5]
+    ```
+  
+    
+  
+  * Mutation only happens with arrays and object but not for primitive values like numbers, strings, and booleans - operations on immutable data types will always return a new value. Operations on mutable values may or may not return a new value and may or may not mutate the data.
+  
+* Function Composition
+
+  * In function composition, you can use function calls as arguments to another function. Function calls always return a value ( it  can be `undefined` ) but potentially lead to errors so it's important to know what values the functions return.
+
+  * Examples:
+
+    ```javascript
+    function add(a, b) {
+      return a + b;
+    }
+    
+    function subtract(a, b) {
+      return a - b;
+    }
+    
+    console.log(add(20, 45));       // => 65
+    console.log(subtract(80, 10));  // => 70
+    
+    function times(num1, num2) {
+      return num1 * num2;
+    }
+    
+    // A more complicated example of function composition:
+    console.log(times(add(20, 45), subtract(80, 10))); // => 4550
+    // 4550 == ((20 + 45) * (80 - 10))
+    
+    ```
+
+    
+
+* Three ways to define a function
+
+  * Function declaration - a notable property of function declaration is hoisting
+
+    ```javascript
+    function functionName(arguments) {
+      // function body
+    }
+    ```
+
+    
+
+  * Function expression - it cannot invoke a function expression before it appreas in your program. JavaScript allows you to assign functions to a variable. You are allowed to do this since JavaScript functions are first-class functions.
+
+    * Key feature of first-class functions is that you can treat them as any other value. You can assign them to variable, pass them as arguments to other functions and return them from a function call.
+
+      ```javascript
+      let greetPeople = function () {
+        console.log('Good Morning');
+      }
+      
+      greetPeople();
+      ```
+
+      
+
+  * Arrow functions
+
+    * Example:
+
+      ```javascript
+      let greetPeople = () => console.log('Good Morning!');
+      greetPeople();
+      ```
+
+      
+
+    * One of the difference is syntatic but also has some properties that make them useful in context of OOP
+
+    * Arrow functions have implicit retursn if the function boy contains one expression:
+
+      ```javascript
+      let add = (a, b) => a + b;
+      ```
+
+      
+
+### Arrays
+
+#### Key Concepts
+
+* Definition: 
+
+  * Ordered list of elements - each element has a unique index number
+  * Arrays can be heterogenous - Arrays can have anything in them including objects and even other arrays
+  * Zero-indexed, length is the highest position that has a value plus 1
+
+* You already know how to access and update arrays - really easy
+
+  * `myArray[0]`
+  * `myArray[myArray.length - 1] = "0"`
+  * Note that `array[array.length] = 10` will add a new value (not a reassignment)
+
+* Note that arrays declared with `const` are a little strange; while you can't change what arrays a `const` references, you can modify the array's contents:
+
+  ```javascript
+  const MyArray = [1, 2, 3];
+  
+  // That means because it's a constant - you can't reassign it
+  // This is not allowed: MyArray = [4, 6, 7];
+  
+  // However:
+  MyArray[1] = 5;
+  console.log(MyArray);
+  ```
+
+  
+
+  * This is because "variables" are pointers when it comes to arrays and objects. **Review more.**
+    * `const` prohibts changing **what thing the ** `const` is pointing to but it does not prohibit changing the content of that thing.
+
+* Some useful methods:
+
+  * `push` (mutates array by adding the values you want to add to the end of the array). It also returns the new length of the array.
+
+    ```javascript
+    let array = [1, 2, 3];
+    console.log(array.push('a')); // logs to console 4
+    console.log(array); // logs to console [1, 2, 3]
+    ```
+
+    
+
+    * Remember that functions have actions that they perform and values that they return and you need to understand this concept. In this case, `push` appends elements to the end of the array but it returns the updated length of that array. 
+    * It does not return the modified array.
+
+  * `concat` (does not mutate - brand new array - other than that same as `push`)
+
+    ```javascript
+    let array = [1, 2, 3];
+    let newArray = array.concat(42, 'abc');
+    ```
+
+    
+
+    * New array that contains all the elements from the origin array followed by the elements passed as arguments
+
+  * `pop` (removes last value - and also returns the removed value)
+
+* `forEach`
+
+  * As argument, `forEach` requires you to pass a callback function that will perform one or more actions on the arguments that are passed to it.
+
+  * Iterates over the elements in the array and invokes the callback function for each element. It passes the element's value to the callback function.
+
+    * A callback function is a function that you pass to another function as an argument. The called function subsequently invokes the callback function at certain times while it runs.
+
+  * Has a return value of `undefined` - **you cannot explicitly return anything with `forEach` or break the loop**. It is specifically designed to loop over the entire array collection.
+
+  * **Important**: This code below invokes the callback function once for each element in the array. `forEach`, during each iteration, invokes the callback with the element's value as an argument. The callback then logs it to the console. Then at the end, `forEach` returns `undefined`.
+
+    ```javascript
+    let array = [1, 2, 3];
+    
+    array.forEach(function (num) {
+      console.log(num);
+    });
+    
+    // Outputs:
+    // 1
+    // 2
+    // 3
+    ```
+
+    
+
+* `map`
+
+  * `map` returns a new array that contains one element for each element in the array - with each element set to the return value of the callback
+  
+    ```javascript
+    let numbers = [1, 2, 3, 4];
+    let squares = numbers.map(num => num * num);
+    squares
+    ```
+  
+    
+  
+* `filter`  returns a new array that includes all the elements from the calling array for which the callback function returns a truthy value. 
+
+  ```javascript
+  let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2]
+  numbers.filter(num => num > 4) // [ 5, 6, 7, 8, 9, 10 ]
+  ```
+
+  
+
+  * `filter` takes a callback function as an argument and iterates over the elements of the array. During each iteration - it invokes the callback function using the value of the current element as an argument. 
+    * If the callback returns a truthy value - `filter` appends the element's value to a new array.
+    * Otherwise - it ignores the element's value and does nothing.
+    * When `filter` finishes iterating, it returns the array of selected elements: the elements for which the callback returned a truthy value.
+
+* `reduce ` (does not mutate the caller)
+
+  * Takes two arguments: a callback function and a value that initalizes something called accumulator. The callback function itself also takes two arguments: an element from the array and the current value of the accumulator.
+
+  * `reduce` returns a value that will be used as the accumulator in the next invocation of the callback.
+
+    ```javascript
+    let arr = [2, 3, 5, 7];
+    arr.reduce((accumulator, element) => accumulator + element, 0);
+    
+    ```
+
+    
+
+    * On the first invocation, we initalize the `accumulator` as `0`. `element` is `2`. The callback returns `2` which becomes the new `accumulator`. When we invoke the callback again `element` is `3` and callback returns `5`. This process continues until the final return value is `17`.
+
+  * Not limited to just numbers:
+
+    ```javascript
+    let strings = ['a', 'b', 'c', 'd'];
+    strings.reduce((accumulator, element) => {
+      return accumulator + element.toUpperCase()
+    }, '');
+    ```
+
+    
+
+* Arrays are objects:
+
+  * `typeof [1, 2, 3]` returns `'object'`.
+
+  * As a consequence if you need to detect whether a variable **references** an object - you need to use `Array.isArray`:
+
+    ```javascript
+    let arr = [1, 2, 3];
+    Array.isArray(arr); // true
+    ```
+
+    
+
+* Weird JS Array Behaviors:
+
+  * If you change an array's `length` property to a new, smaller vlaue, the array gets truncated. JavaScript removes all elements beyond the new final element.
+
+    ```javascript
+    let arr = [1, 2, 3];
+    arr.length = 2;
+    
+    console.log(arr); // [1, 2]
+    ```
+
+    
+
+  * If you change an array's length to a larger value - the array expands to the new size - however, the new elements do not get initialized. 
+
+    ```javascript
+    let arr = [];
+    arr.length = 3;
+    arr; // returns [ <3 empty items> ]
+    arr[0]; // returns undefined
+    
+    arr.filter(el => el === undefined); // returns []
+    arr.forEach(element => console.log(element)); // no output, but returns undefined
+    
+    arr[1] = 3;
+    arr; // returns [ <1 empty item>, 3, <1 empty item> ]
+    arr.length; // 3
+    arr.forEach(el => console.log(el)); // outputs 3 only
+    ```
+
+    
+
+    * JS treats unset array elements as missing but `length` property includes the unsert elements.
+
   * 
 
+* 
 
+
+
+
+
+### Loops
+
+#### Key Concepts
+
+* `while` loop is an event-vased loop where the code within the `while` block keeps running until a certain event is reached.
+
+  ```javascript
+  let balance = 100;
+  let goalBalance = 200;
+  
+  while (balance < goalBalance) {
+    balance *= 1.05;
+  }
+  
+  console.log(balance);
+  ```
+
+* `for` - for definite sequence and a finite ending. 
+
+  ```javascript
+  let names = ['Chris', 'Kevin', 'Naveed', 'Pete', 'Victor'];
+  let upperNames = [];
+  
+  for (let index = 0; index < names.length; index += 1) {
+    upperNames.append(names[index].toUpperCase());
+  }
+  
+  console.log(upperNames);
+  ```
+
+  
+
+* `continue`:
+
+  ```javascript
+  let names = ['Chris', 'Kevin', 'Naveed', 'Pete', 'Victor'];
+  let upperNames = [];
+  
+  for (let i = 0; i < names.length; i += 1) {
+    if (names[i] === 'Naveed') {
+      continue;
+    }
+  
+    upperNames.push(names[i].toUpperCase());
+  }
+  
+  console.log(upperNames);
+  ```
+
+  
+
+* `break` - for cases where you might want to skip the remaining iterations:
+
+  ```javascript
+  let array = [3, 1, 5, 9, 2, 6, 4, 7]
+  let indexOfFive = -1;
+  
+  for (let i = 0; i < array.length; i += 1) {
+    if (array[i] === 5) {
+      indexOfFive = 1;
+      // adding break here stops the loop from runnning after it finds 5
+      break;
+    }
+  }
+  ```
+
+  
 
 
 

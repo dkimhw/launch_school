@@ -9,6 +9,127 @@ Take it seriously:
 
 
 
+Written Test Notes
+
+* 20 questions (3 hours) - you need to pace yourself - track your time
+  * Have two timers
+  * 3 hour time
+  * One that loops 8 minutes
+* Over prepare - not easy
+  * It requires detailed and precise language
+  * Precisely explain why the code does what it does - what does it output. What does it do on this line?
+    * You don't have to explain all of the lines of code
+    * Just the relevant lines
+* Examples
+* Common mistakes 
+  * Generally the problem is with the precision of language (no pseudocode)
+* Practice #1:
+  * What does this output? What does it return?
+    * `[[1, 2], [3, 4]]`
+    * [undefined, undefined]
+    * Returns a new array 
+  * What data structure is it?
+    * Nested array
+    * Uses map function
+      * Calls a callback function for each element from the array
+* Practice #2:
+  * What does this code return and why?
+    * Returns a new array: [undefined, bear]
+      * `map` returns the same length of the array
+    * For every element the call back function checks if the string's length is greater than 3
+      * Where does the callback function come in?
+        * You pass the element to the call back function (if (elem.length > 3)) {return elem;}
+    * The callback function only returns string's length that is greater than element
+    * `undefined` gets returned because nothing was returned - returns the `elem`
+  * Accepts the callback function as an argument
+    * Transforms the element based on the callback function
+    * **Look this up**
+  * Got to be more detailed.
+
+* Practice #3 with `filter`
+  * **Not based on return valule - based on whether the callback function evaluates to true**
+    * Really really look up what filter does
+    * Really understand what it's doing
+  * Accepts a callback function as an argument
+* Practice #4 
+  * You cannot know what the code will print until line 11
+    * It will not log anything unless you call it
+    * You have analyze where the function is called
+      * `undefined` - absence of value
+  * The order in which you explain the code matters
+  * It's variable scope
+    * Global variable scope
+    * `animal` in function -  is a parameter - local variable of the function `speak()`
+    * `animal` === undefined because no arguments were passed
+  * Variable shadowing
+    * You need to explain why `animal` in line 1 is not the same as `animal` in line 3 & 4
+    * Why is `animal` as a parameter `undefined` - we didn't pass in any value
+    * You don't need to explain the `else` part
+
+* Practice #5
+  * We initalize the variable `greeting` with "Hello"
+  * Order matters in explaning
+    * Line #1 we initialize `greeting`
+    * Until you invoke the function you don't have to explain anything. Pass in undefined the whole thing fails 
+    * So start from line 9
+      * You don't need to explain any of this
+        * We invoke `test` and pass in variable `greeting`
+        * We don't save the `.concat` - it does not mutate (can't mutate primitives)
+        * We don't save it anywhere
+        * We return the lowercase
+    * In line 10
+      * greeting will stay "Hello"
+      * You don't save save the returned string anywhere so the greeting is still "Hello"
+      * It doesn't mutate because it's a primitive (cannot be mutated)
+      * It remains unchanged
+  * A lot of people make this mistake
+    * We are calling `concat` method on `str` but we are not mutating `str` as strings are primitive values.
+      * We are calling `concat` method on the string assigned to `str` variable but we are not mutating that string as strings are primitive values
+    * We cannot call methods on variables but on Objects. We are calling methods on the values that are assigned to the variables.
+* Practice #6
+  * Start with initalize variable
+  * Start at line #8 test(greeting)
+    * We pass in greeting to test
+    * arr now references greeting
+      * with objects - Javascript is pass by reference
+    * Variables cannot point to other variables
+      * It points to the same object that `greeting` is pointed to `["Hello"]`
+    * **We reassign the Object which `greeting` and `arr` were pointing to with `arr.concat("World!")`** - reword this
+      * `arr` , we are reassigning with a new object `arr.concat("World!")`
+      * .concat is a non-mutating method
+
+
+
+
+
+Interview Notes
+
+* Two problems (40 to 50 minutes)
+  * Live with interviewer
+  * You are writing pseudocode and using pedac process
+    * It helps to formulate your thoughts
+    * Highly encourage to do lite PEDAC so that you can do better
+  * Not all requirements are explicit - you have to ask the questions
+    * Ask question for the interviewer - clarify
+    * Some requirements are implicit - you need to have clear test cases to make sure you are solving for the right problem
+  * **Talk out loud while coding**
+    * **You have to communicate your thoughts**
+  * Meet other students to practice
+* Be comfortable solving medium difficulty problems
+  * This is because you are anxious and you don't do your best when you are relaxed
+  * The problems are going to be easier than medium difficulty problems but again it's harder in an interview setting
+* Go to codewars
+  * Be comfortable with solving 5, 6, 7 kyu
+* Practice, practice, practice
+  * Practice on codewars while talking out loud
+  * Practice pair coding
+
+
+
+
+
+
+
 ### Links
 
 * [https://medium.com/launch-school/preparing-for-my-first-launch-school-assessment-d0ea9aa69208]
@@ -55,11 +176,17 @@ Take it seriously:
 - truthiness: `false` and `true` vs. falsy and truthy
   - Initial Draft Done (need follow-up) - dig into more resources online
 - function definition and function invocation
+  - Initial Draft Done
+  - Definitely needs follow-up
 - function declarations, function expressions, and arrow functions
+  - Initial Draft Done
+  - Definitely needs follow-up
 - implicit return value of function invocations
-- first-class functions
-- [side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)
-- naming conventions (legal vs idiomatic)
+  - Initial Draft Done (need refinement)
+- **first-class functions**
+  - https://medium.com/predict/javascript-functions-vs-methods-and-other-helpful-tips-e58a621b1d27
+- **[side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)**
+- **naming conventions (legal vs idiomatic)**
 
 
 
@@ -78,14 +205,16 @@ Take it seriously:
 4. Refine the Notes
    1. Really synthesize the different concepts into a succinct description of the different topics listed there
    2. Add to the weak areas where my notes are not strong enough
-5. Review the quizzes
-6. Review the exercises in JS101
-7. Take ten+ code
+5. Go through each lesson and read through areas where I am not familar or I need to add
+6. Review the quizzes
+7. Review the exercises in JS101
+8. Take ten+ code
    1. Explain in precise language what it is doing
    2. This is to get practice in using precise language
-8. CodeWars
-9. Flashcards
-10. Rinse & Repeat
+9. CodeWars
+10. Flashcards
+11. Review the notes
+12. Practice precise language
 
 
 
