@@ -140,6 +140,11 @@ Interview Notes
 
 
 
+### Books
+
+* https://launchschool.com/books/javascript - will be good to review to make sure if there are concepts covered there that I didn't cover and important to the written test
+* 
+
 
 
 ### Tools
@@ -165,8 +170,10 @@ Interview Notes
   - I am not sure how much type conversions we need to know - worth reading through the JS101
 - how passing an argument into a function may or may not permanently change the value that a variable contains or points to
   - Initial Draft Done (need follow-up)
-- **working with Strings, Arrays, and Objects. In particular, you should be thoroughly familiar with the basic Array iteration methods (`forEach`, `map`, `filter`, and `find`) and how to use Object methods to access the keys and values in an Object as an Array.**
-- **understand that arrays are objects, and be able to determine whether you have an Array**
+- working with Strings, Arrays, and Objects. In particular, you should be thoroughly familiar with the basic Array iteration methods (`forEach`, `map`, `filter`, and `find`) and how to use Object methods to access the keys and values in an Object as an Array.
+  - Initial Draft Done (refinement needed)
+- understand that arrays are objects, and be able to determine whether you have an Array
+  - Initial Draft Done (refinement needed)
 - understand the concepts of *pass-by-reference* and *pass-by-value*
   - Initial Draft Done (need follow-up)
 - [variables as pointers](https://launchschool.com/books/javascript/read/more_stuff#variablesaspointers)
@@ -186,35 +193,41 @@ Interview Notes
 - **first-class functions**
   - https://medium.com/predict/javascript-functions-vs-methods-and-other-helpful-tips-e58a621b1d27
 - **[side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)**
+  - Initial Draft Done (quick review)
 - **naming conventions (legal vs idiomatic)**
 
 
 
-### Writtent Exam Plan
+### Written Exam Plan
 
 1. Focus on 1 to 2 hours every day. Show up everyday to study and do consistent, quality work in every day. Even on days you do not necessary want to
-2. Attend Study Groups
+2. Attend Study Groups **(Completed)**
    1. Really understand what will be on the exam
    2. The format
    3. The level of depth you need to understand
    4. Ask for tips preparing
-3. Centralize the Notes
+3. Centralize the Notes **(Completed)**
    1. Create an initial set of centralized notes that you can refer to when studying for the written exam
    2. Review that notes cover all the major topics
    3. Will also serve as a reference when you take the exam
-4. Refine the Notes
-   1. Really synthesize the different concepts into a succinct description of the different topics listed there
-   2. Add to the weak areas where my notes are not strong enough
-5. Go through each lesson and read through areas where I am not familar or I need to add
-6. Review the quizzes
-7. Review the exercises in JS101
-8. Take ten+ code
-   1. Explain in precise language what it is doing
-   2. This is to get practice in using precise language
-9. CodeWars
-10. Flashcards
-11. Review the notes
-12. Practice precise language
+4. Initial Start
+   1. Build Starter Examples
+      1. Review the quizzes
+      2. Review the exercises in JS101
+   2. Practice on codewars
+   3. Review notes
+5. Refine the Notes
+   1. Before I can refine - I need to start practicing and reading the notes and seeing if the notes are good enough
+   2. Go through each lesson and read through areas where I am not familar and we need to add
+      1. Really synthesize the different concepts into a succinct description of the different topics listed there
+   3. Add to areas where I am weak
+6. Go through each lesson and read through areas where I am not familar or I need to add
+7. On Repeat
+   1. Practice CodeWars
+      1. Precise language
+   2. Practice Examples
+      1. Precise language
+   3. Review Notes
 
 
 
@@ -227,30 +240,3 @@ Interview Notes
 ---
 
 
-
-
-
-What to bring to the written exam
-
-  * 
-
-5. Interview Study Plan
-  * Attend Study Groups
-    * You get to practice & find people to study together
-  * Re-do the Javascript exercises
-    * Pair up with another student and send each other 3–4 small snippets of code with the questions: What does this output? What does this return? Why?
-      * Study together
-    * For each exercise, use the PEDAC approach
-    * For each exercise, using precise language describe in: (109 Study Guide)[https://launchschool.com/lessons/cdfe3681/assignments/cc654f56] to explain what the code is doing including syntatically description as well as core programming concepts
-    * Practice writing code orally
-      * Review:
-        * What to clarify & ask with interviewer?
-      * Describe your thinking process as you read the program 
-    * Use descriptive names
-    * Test often your code
-  * Codewars after you go through those exercises
-  * Review methods on Quizlet or Anki
-
-
-
-It says watch the videos? What does that mean?
