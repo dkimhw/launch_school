@@ -1,30 +1,28 @@
-
 ## JS 109 Study Guide
 
-### Assignments and Comparison
+
+
+### Variable Assignments
 
 #### Key Concepts:
 
-* Variables store information that a program must reference or manipulate - the y also allow programmers to label the data in memory so that it can be accessed later
-
-* Use descriptive names for variables that accuarately and concisely describe the data the variable contains
+* Variables store information that a program must reference or manipulate - they also allow programmers to label the data in memory so that it can be accessed later
 
 * How does JavaScript assign values?
 
   * Assigning a value to a variable is called variable initialization. 
 
     * `let name = 'David';`
-    * Now, we can use the variable `name` anywhere in the JS program
-
+    
   * There are three basic ways to create a variable
 
     * `let var = 0;`
 
-      * Variables declared with 'let' cannot be accessed in block scope - it removes the chance for code blocks to access and change these variables. It makes let truly a local variable and remove ambiguity and potential for bugs.
+      * Variables declared with 'let' are limited to the scope of a block statement - if initialize in code block , cannot be accessed outside it.
 
     * `const var = 16;`
       
-      * For values that will not be updated and are constant we want to use const. JavaScript will prevent us from updating that variable or replacing it. It will also denote to other programmers that this variable is a constant and will not be updated in our code (better readability and understanding)
+      * For values that will not be updated and are constant we want to use `const`. JavaScript will prevent us from updating that variable or replacing it. It will also denote to other programmers that this variable is a constant and will not be updated in our code (better readability and understanding)
       * Once you initialize a constant you cannot give it another value. Constants store values that remain the same throughout the execution of a program.
       
     * `var hello = "Hello";`
@@ -39,10 +37,6 @@
       
       console.log(b); // prints 2
       ```
-
-      
-
-      * 
 
   * **Always declare variables with `let` and `const`. JavaScript has bizarre rules when working with undeclared variables. The most notable one is that all undeclared variables are global variables no matter where this undeclared variable was created. They ignore block and function scope.**
 
@@ -65,42 +59,9 @@
   
 
   * One way to update/reassign variables?
-    
+
     * `name = 'Patricia';`
-    
-  * Variable Shadowing
 
-    ```javascript
-    let foo = 1;
-    
-    function bar() {
-      let foo = 2;
-      console.log(foo); // logs 2
-    }
-    
-    bar();
-    ```
-
-    
-
-    * Since functions create scope in JavaScript - the `foo` in the body of the `bar` function is distinct from the `foo` declared in line 1 in the global scope. Thus, we can say that `foo` in the `bar` function shadows the `foo` in the global scope.
-      * You are no longer able to access the global variable within the function.
-
-    ```javascript
-    function bar() {
-      let foo = 2;
-      console.log(foo);  // logs 2
-    }
-    
-    let foo = 1;
-    bar();
-    ```
-
-    
-
-    * This is still variable shadowing because shadowing occurs based on when the variable is declared:  in this code - line 6 runs before line 2 so the `foo` on line 2 can shadow `foo` on line 6.
-
-* How does JavaScript compare values?
 
 
 
@@ -130,13 +91,13 @@
 
     
 
-  * Function scope: Functions define a new scope for local variables. You can think of the scope defined by a function as an inner scope. Nested functions define nested scopes. A variable's scope is determined by where it is declared.
+  * Function scope: Functions define a new scope for local variables. You can think of the scope defined by a function as an inner scope. 
 
     * Rule #1: Outer scope variables can be accessed by the inner scope
 
       * You can change variables from an inner scope and have that change affect the outer scope variable
       * This means that when we instantiate variables in an inner scope - we have to be extremely careful that we are not accidentally re-assigning an existing variable in an outer scope.
-      * That's a huge reason why we should avoid single-letter variable names.
+        * That's a huge reason why we should avoid single-letter variable names.
 
       ```javascript
       let a = 1;         // outer scope variable
@@ -155,8 +116,8 @@
     * Rule #2: Inner scope variables cannot be accessed in outer scope
 
       * Outer scope in this case is the global scope.
-      * Note that a local variable only comes into existence when you call that function - the mere act of defining a function does not create any variable.
-      * When `aFunc()` is called - `a` will be created and accessible in the funciton scope but immediately discarded once the function executes and returns to the main flow of the program
+      * Note that a local variable only comes into existence when you call that function - the mere act of declaring a function does not create any variable.
+      * When `aFunc()` is called - `a` will be created and accessible at the function scope but immediately discarded once the function executes and returns to the main flow of the program
 
       ```javascript
       function aFunc() {
@@ -243,7 +204,7 @@
 
       
 
-      * Here, `console.log(number)` will use the parameter `number` and discard the outer scoped local variable. This is called variable shadowing - prevents access to outer scope local variable. 
+      * Here, `console.log(number)` will use the parameter `number` and discard the outer scoped local variable of the same name. This is called variable shadowing - prevents access to outer scope local variable. 
       * Variable shadowing also prevents us from making changes to the outer scoped *`number`*.
       * You want to avoid variable shadowing since it is never what you intend. Choosing long and descriptive variable names is one simple way to ensure that you do not run into any of these weird scoping issues. 
       
@@ -402,7 +363,20 @@
 * Objects & Variables
 
   * Reassignment does not mutate the variable to the left of the assignment operator
-  * Instead - it changes the variable in such a way that it refers to the array on the right. Each variable has a value and reassigning values does not affect any other variables that happen to have the same value.
+
+  * Instead - it changes the variable in such a way that it refers to the object on the right. Each variable has a value and reassigning values does not affect any other variables that happen to have the same value.
+
+    ```javascript
+    let a = [1, 2];
+    let b = a;
+    
+    b = [1, 3]; // b gets a new pointer that points to [1, 3] now
+    
+    console.log(a); // [1, 2]
+    console.log(b); // [1, 3]
+    ```
+
+    
 
 * Does that mean that arrays and other objects get stored directly inside variables like primitives?
 
@@ -419,7 +393,7 @@
 
     
 
-  * This happens because these variables that store objects are references to the memory locations that was storing `[1, 2]`. This concept goes back to stack versus heap. Primitive values get stored in the stack - faster but smaller memory. Objects like arrays store the actual value in the heap but a reference to the heap is in the stack
+  * This happens because variables that store objects are references to the memory locations that was storing `[1, 2]`. 
 
   * When `let f = e` runs - both `f` and `e` both contain the same pointer value. When `e.push(3, 4)` runs - it uses the pointer to access and mutate the array by appending `3` and `4` to its original value. Since `f` also points to that same array, both `e` and `f` reflect the updated contents of the array.
 
@@ -428,13 +402,45 @@
   ```javascript
   let g = ['a', 'b', 'c']
   let h = g
-  g[1] = 'x'
+  g[1] = 'x' // mutating expression
   g // [ 'a', 'x', 'c' ]
   
   h // [ 'a', 'x', 'c' ]
   ```
 
+* When working with nested collections and variables reference inner collections directly
+
+  * Examples:
+
+    ```javascript
+    let a = [1, 3];
+    let b = [2];
+    let arr = [a, b];
+    arr // => [ [ 1, 3 ], [ 2 ] ]
+    
+    a[1] = 5;
+    arr; // => [ [ 1, 5 ], [ 2 ] ]
+    
+    arr[0][1] = 8;
+    arr; // => [ [ 1, 8 ], [ 2 ] ]
+    a;   // => [ 1, 8 ]
+    
+    arr[0] = 'This will only change in arr'
+    console.log(arr);
+    console.log(a)
+    ```
+
   
+
+* The value of `arr` changed because `a` still points to the same Array object that `arr[0]` is pointing to. When we modified it by replacing `3` with `5`, we were modifying the same Array object.
+
+* What if we modify the first array in `arr`? Is it different than modifying `a` directly?
+
+  * It produces the same result as modifying `a` directly. In both cases, we are modifying the object that `a` and `arr[0]` point to - we now have two ways to reference the same object. 
+  * In the first example, the object was modified through `a`. In the second example the object was modified through `arr[0]`.
+  * `a` and `arr[0]` are, in fact, two different ways to reference the same object. The assignment `arr[0][1] = 8` is equivalent to `a[1] = 8`.
+
+
 
 ### Primitive Values, Types, and Type Conversions
 
@@ -442,19 +448,17 @@
 
 * Primitive Values
 
-  * What data types are primitive in JS?
   * Primitive values are pass by value. What does that mean? Pass by value means that we pass along a full copy of that value when we assign or pass along primitive values. If you change one variable that holds a primitive value - it does not change other variables with the same value
 
   ```javascript
   let a = 4;
   let b = a;
+  // At this point b and a point to two different values of 4 - they just happen to share the same value
   
   a = 7; // Reassign a
   
   console.log(a) // prints 7
   console.log(b) // prints 4
-  
-  // At this point b and a point to two different values of 4 - they just happen to share the same value
   ```
 
 
@@ -527,7 +531,7 @@
 
       * `null` represents the intentional absence of a value (emptiness or nothing).
       * Unlike `undefined` - you need to explicitly use `null` - `undefined` can arise implicitly.
-      * `null` is an object - goes back to when JavaScript was first developed and was preserved through the years - fixing this would break to omany applications.
+      * `null` is an object - goes back to when JavaScript was first developed and was preserved through the years - fixing this would break too many applications.
 
 * Other Data Types
 
@@ -560,7 +564,6 @@
   * Converting to Numbers
 
     * `Number` function coerces a string to a number (there are other functions that help you explicitly convert data types):
-      
     ```javascript
       console.log(typeof Number('1'));
     ```
@@ -580,8 +583,8 @@
         * It doesn't crash your code - instead it just returns `NaN`. This happens often in JavaScript - the code simply fails silently and lets the programmer determine whether an error is actually a problem.
       
     * `parseInt` & `parseFloat` - always returns a number when the first character of the string value is a digit or the first two characters are a sign and a digit.
-  
-      ```javascript
+    
+    ```javascript
       console.log(parseInt('12xyz')); // 12
       console.log(parseInt('3.14')); // 3
       console.log(parseInt('hello3.14')); // NaN
@@ -591,13 +594,13 @@
       
       // Same for parsefloat
       console.log(parseFloat('12.5foo')); // 12.5
-      ```
-  
-      
-  
-      * What about other data types to Number? **No need to memorize this** - just that you need to know that these inconsistencies exist (pretty random assignment for what is not a number and what is a "0") and make sure to check when necessary.
-  
-        ```javascript
+    ```
+    
+    
+    
+    * What about other data types to Number? **No need to memorize this** - just that you need to know that these inconsistencies exist (pretty random assignment for what is not a number and what is a "0") and make sure to check when necessary.
+    
+      ```javascript
         Number({}) // NaN
         Number([]) // NaN
         Number([4]) // 4
@@ -605,21 +608,21 @@
         Number([1, 2, 3]) // NaN
         Number(undefined) // NaN
         Number(null) // 0
-        ```
-  
-        
-  
-    * You can use `+` operator to coerce a value to number - it works like `Number()` function but more concise
-  
-      ```javascript
+      ```
+    
+      
+    
+  * You can use `+` operator to coerce a value to number - it works like `Number()` function but more concise
+    
+    ```javascript
       +"" // 0
       +'2.3' // 2.3
-      ```
-  
-      
-  
-      * However - one downside is lack of clarity. `Number()` function makes your intent very clear and leaves no room for ambiguity that can sometimes arise with unary operators
-  
+    ```
+    
+    
+    
+    * However - one downside is lack of clarity. `Number()` function makes your intent very clear and leaves no room for ambiguity that can sometimes arise with unary operators
+    
   * Coercing Values to Strings
   
     * `toString()`
@@ -627,7 +630,7 @@
       * Can call on all data types except `null` and `undefined` - illegal to call methods on these types
   
         ```javascript
-        let number 42 // note that javascript does not let you call a method directly on a number literal - it think it's a part of floating number
+        let number = 42; // note that javascript does not let you call a method directly on a number literal - it think it's a part of floating number
         number.toString(); // 42.toString(); - not allowed
         ```
   
@@ -643,7 +646,7 @@
   
     * `String()`
   
-      * One advantage is `String()` works on `null` and `undefined` - useful because you can avoid program-halting errors that `toString()` can lead to.
+      * One advantage of `String()` is that it works on `null` and `undefined` - useful because you can avoid program-halting errors that `toString()` can lead to.
   
         ```javascript
         String(42) // '42'
@@ -753,7 +756,7 @@
 
 
 
-### Expressions and Return Values
+### Expressions and Return Values (console.log vs return)
 
 #### Key Concepts:
 
@@ -761,13 +764,13 @@
 
   * Definition: Expression is anything that JavaScript can evaluate to a value even if that value is `undefined` or `null`.
   * Some examples:
-    * In the first example (`7 + (5 + 2)`) is an expression.
+    *  (`7 + (5 + 2)`) is an expression which returns `14`
     
     * When you run *`console.log()`* you will notice that it returns *`undefined`* - this is the evaluated value of your expression so it returns *`undefined`* while the first example returns *`14`*.
     
       ```javascript
-        7 + (5 + 2);
-        console.log(5 + 2);
+        7 + (5 + 2); // 14
+        console.log(5 + 2); // undefined
       ```
     
       
@@ -783,32 +786,34 @@
 
 
       * Initialized means a variable is declared and assigned a value
-    
-    ```javascript
-    let foo; // this is a statement, it is declared but not initalized
-    console.log(5 * let name); // This is not valid because `let name` is not an expression
-    
-    console.log(let name)
-    // SyntaxError: missing ) after argument list
-    
-    // This is a statement and an expression
-    let myNumber = 3;
-    
-    // The assignment of 3 to myNumber is an expression
-    // let with a variable name and optional assignment formas JS statement
-    
-    ```
 
 
-    * Another example:
-    
-      ```javascript
-      let foo = false; // returns undefined
-      let bar;
-      bar = false // returns false
-      ```
-      
-      * The return values are different since the `let` statement always returns `undefined`. But assignment expressions that are not part of a statement return the new value for the variable. 
+```javascript
+let foo; // this is a statement, it is declared but not initalized
+console.log(5 * let name); // This is not valid because `let name` is not an expression
+
+console.log(let name)
+// SyntaxError: missing ) after argument list
+
+let myNumber = 3; // returns undefined because of "let" syntax here
+myNumber = 4; // this is a statement and an expression
+
+// The assignment of 3 to myNumber is an expression
+// let with a variable name and optional assignment formas JS statement
+console.log(let myNumber = 3 * 3); // This is not allowed
+```
+
+
+
+* Another example:
+
+  ```javascript
+  let foo = false; // returns undefined
+  let bar;
+  console.log(bar = false) // returns false and can be printed out
+  ```
+  
+  * The return values are different since the `let` statement always returns `undefined`. But assignment expressions that are not part of a statement return the new value for the variable. 
 
 * Expressions versus Statements
 
@@ -817,7 +822,7 @@
     * Examples:
   
       ```javascript
-      theFinalValue = firstValue + secondValue;
+      theFinalValue = firstValue + secondValue; // statement & expression
       ```
   
       
@@ -851,7 +856,7 @@
     * **Important point to review:** Expressions can be part of a statement as shown above but not all statements are expressions (because not everything in the code resolves to a value - expressions are code that resolve to a value)
   
       * What is an example of that?
-      * JavaScript distinguishes expressions and statements. A statement is an instruction, an action. Remember conditions with `if`, loops with `while` and `for` — all those are statements, because they just perform actions and control actions, but don't become values.
+      * JavaScript distinguishes expressions and statements. A statement is an instruction or an action. Remember conditions with `if`, loops with `while` and `for` — all those are statements, because they just perform actions and control actions, but don't become values. Same with `let`.
   
 * Printing (logging) versus returning values
 
@@ -873,7 +878,7 @@
   
     ```javascript
     let a = console.log("Howdy");
-    a
+    console.log(a); // undefined
     ```
   
     
@@ -882,7 +887,7 @@
   
 * Return Values
 
-  * **Expressions always return a value (Review more).** Some functions perform an action but will not return anything `console.log` for example. Other functions will not print anything but perform some operation and return a value.
+  * **Expressions always return a value.** Some functions perform an action but will not return anything `console.log` for example. Other functions will not print anything but perform some operation and return a value.
 
 
 
@@ -894,13 +899,15 @@
 
 * JavaScript is a hybrid of Pass by Value and Pass by Reference
 
+  * "how passing an argument into a function may or may not permanently change the value that a variable contains or points to"
+
 * Pass by Value
 
   * Definition: Pass by value is when you pass a variable to a function call, that variable is not affected after the function gets executed no matter what the function does with it (think C)
 
   * When you pass primitive values to functions - JavaScript is pass by value (they are immutable). No operation performed on a primitive value can permanently alter the value.
 
-    * When you pass a primitive value like Number - no matter what the function does with it - you will not be able to see the effects by inspecting the variable that you passed to the function.
+    * When you pass a primitive value like Number - no matter what the function does with it - the value you passed into the function will not change
 
       ```javascript
       let a = 5
@@ -945,6 +952,7 @@
     
 
     * You can see above that passing the string to `changeName` did not change the contents of the `name` variable. Again think "C" here, we are not passing a pointer but the actual copy of the variable so nothing is changed.
+    * Passing a primitive variable to a function parameter means that we make a new local instance of the variable and copy the value - any changes that we make to the argument (when the function is invoked) will leave the original variable unaffected. 
 
   * Another example:
 
@@ -996,7 +1004,7 @@
 
 
 
-### Control Flow (Truthiness)
+### Control Flow + (comparison) + (Truthiness)
 
 #### Key Concepts
 
@@ -1040,7 +1048,7 @@
 
     * `==` - loose equality operator  (loose comparison)
 
-    * `!=`
+    * `!=` - loose inequality operator (loose comparison)
 
       ```javascript
       console.log(5 != 5); // same result as !==
@@ -1071,7 +1079,7 @@
 
       
 
-    * `!`
+    * `!` - not operator
 
       ```javascript
       console.log(!true);
@@ -1113,16 +1121,16 @@
 
 * Truthiness (**Understand false and true vs. falsy and truthy**)
 
-  * Definitions (refine more):
+  * Definitions:
 
     * **falsy**: refers to values that evaluates as false.
-      * Not the same thing as being actually `true`
+      * Not the same thing as being actually the boolean value of `true`
     * **truthy**: refers to values that evaluates as true.
-      * Not the same thing as being actually `false`
+      * Not the same thing as being actually the boolean value of `false`
 
   * Notice that we use "evaluates as false" or "evaluates as true". Saying that an expression returns `true` or `false` is not the same as saying that it returns a truthy or falsy value, or that it evaluates as true or false. The terms true and false refer to the Boolean values `true` and `false`. 
 
-  * Truthiness means that we can use any condition or logical expression because JavaScript considers any non-zero (and non-NaN) numbers to be truthy. It does not mean that `num` is equal to `true`:
+  * Truthiness means that we can use any logical expression in a conditional statement because JavaScript considers any non-zero (and non-NaN) numbers to be truthy. It does not mean that `num` is equal to `true`:
 
     ```javascript
   let num = 5;
@@ -1144,7 +1152,7 @@
     ```javascript
   let name;
     if (name = getNameFromUser()) {
-    console.log(`Hi ${name}`);
+    	console.log(`Hi ${name}`);
     } else {
       console.log("you must enter your name!");
     }
@@ -1153,9 +1161,8 @@
     
     
     * `getNameFromUser` solicits and returns the user's name and returns an empty string if the user does not enter a name. Since an empty string is falsy - we can test for a missing name by evaluating the assignment `name = getNameFromuser()` - if the user did not enter her name the expression evaluates as false, and the code logs `you must enter your name!`
-    * This is discouraged however.
-
-  * Any value can in JavaScript can be coerced into a boolean value which is why you don't always need an expression that evaluates to true or false.
+    
+  * Any value in JavaScript can be coerced into a boolean value which is why you don't always need an expression that evaluates to true or false.
 
     * For example: `if` statement does not need something like `5 === 5`. Thus, you can use **any** expression in a conditional statement.
 
@@ -1195,6 +1202,9 @@
     * `undefined`
     * `null`
     * `NaN`
+      * `NaN` is still a numeric data type - just means undefined numerical result
+      * `typeof NaN` will return "number"
+      * Must use `isNaN`.
 
   * Everything else will evaluate to true
 
@@ -1310,13 +1320,25 @@
 
 #### Key Concepts
 
+* "function defintion and function invocation"
+
+  * The code inside a function is not executed when the function is defined.
+  * The code inside a function is executed when the function is invoked - executes the code inside a function
+
+* "function declarations, function expressions, and arrow functions"
+
+  * Function definition (also called function declaration ) consists of the `function` keyword followed by:
+    * The name of the function
+    * A list of parameters to the function
+    * The JavaScript statements that define the function enclosed by curly brackets
+
 * Basic Definitions
 
-  * The function allows programmers to make code shorter and reusable (easier to maintain and read).
+  * Function allows programmers to make code shorter and reusable.
 
-  * Parameters - local variables names between `()` . Arguments are the values you pass into the function for each of those parameters.
+  * Parameters - local variable names between `()` . Arguments are the values you pass into the function for each of those parameters.
 
-    ```javascrip
+    ```javascript
     function add(left, right) { // left & right are parameters
       return left + right;      // left & right are arguments
     }
@@ -1327,6 +1349,7 @@
     
 
     * You can think of parameters as placeholders while arguments refer to the values that get stored in the placeholders.
+    * Parameters are initialized with the values of the arguments supplied to the function
 
   * Functions take optional values called arguments:
 
@@ -1573,7 +1596,7 @@
 
     
 
-  * Function expression - it cannot invoke a function expression before it appreas in your program. JavaScript allows you to assign functions to a variable. You are allowed to do this since JavaScript functions are first-class functions.
+  * Function expression - it cannot invoke a function expression before it appears in your program. JavaScript allows you to assign functions to a variable. You are allowed to do this since JavaScript functions are first-class functions.
 
     * Key feature of first-class functions is that you can treat them as any other value. You can assign them to variable, pass them as arguments to other functions and return them from a function call.
 
@@ -1595,24 +1618,65 @@
       let greetPeople = () => console.log('Good Morning!');
       greetPeople();
       
+      const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
+      
+      
+      let add = (a, b) => a + b; //  Arrow functions have implicit returns if the function body contains one expression
       ```
     
-
-const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
-      ```
-
-​      
-
-    * One of the difference is syntatic but also has some properties that make them useful in context of OOP
+    * Arrow functions may implicitly return values by simply omitting the curly braces that traditionally wrap a function's body if their body only contains a single expression.
     
-    * Arrow functions have implicit retursn if the function boy contains one expression:
+    * When using implicit returns, object literals must be wrapped in parenthesis so that the curly braces are not mistaken for the opening of the function's body.
     
       ```javascript
-    let add = (a, b) => a + b;
+      const foo = () => { bar: 1 } // foo() returns undefined
+      const foo = () => ({ bar: 1 }) // foo() returns {bar: 1}
+      ```
+    
+      
+  
+* Functions as first-class and higher-order functions
+
+  * First-class values
+
+    * JavaScript functions are first-class values. Not only can you invoke functions but you can also pass them around your program like any other value.
+
+    * Functions that can be treated as values let us create functions that can take other functions as arguments and return other functions
+
+    * JavaScript is a declarative programming language
+
+      ```javascript
+      // map transformation
+      let numbers = [1, 2, 3, 4, 5];
+      let transformedNumbers = numbers.map(currentNum => currentNum * currentNum);
+      
+      transformedNumbers; // => [ 1, 4, 9, 16, 25 ]
       ```
 
+      * This declarative style of programming is possible only because we can treat functions as values. The `map` method takes a function as an argument and calls it for each element of the array used to call `map`.
 
-​      
+    * Functions that take other functions as arguments are called Higher Order Functions - as are functions that return other functions
+
+      * For example: `forEach` is a higher order function
+
+        ```javascript
+        [[1, 2], [3, 4]].forEach(arr => console.log(arr[0]));
+        ```
+
+        
+
+      * We use multi-dimensional array `[[1, 2], [3, 4]]` to call `forEach`. Each inner array / element is passed to the callback function, in turn, and assigned to the parameter `arr`. We then use the element reference operator `[]`, to get the value at index `0` of the array. 
+
+      * On the first invocation of the callback, `arr[0]`  returns 1, and on the second, it returns `3`. In each invocation ,`console.log` outputs a string representation of the value returned by `arr[0]`. **Since this is a single statement callback** - the callback's return value is the return value of `console.log(arr[0])` which is `undefined`. 
+
+      * `forEach`, however, does not do anything with this returned value though - and since the return value of `forEach` is always `undefined` - that is what ultimately gets returned.  
+
+    * In JavaScript world - functions that we pass to other functions are often called callback functions. 
+
+
+
+
+
 
 ### Arrays
 
@@ -1682,7 +1746,7 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
 
     
 
-    * New array that contains all the elements from the origin array followed by the elements passed as arguments
+    * New array that contains all the elements from the original array followed by the elements passed as arguments
 
   * `pop` (removes last value - and also returns the removed value)
 
@@ -1713,7 +1777,7 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
 
     
     
-  * `forEach` can be a better way to filter an object that `filter`.
+  * `forEach` can be a better way to filter an object that `filter` sometimes.
 
 * `map`
 
@@ -1744,6 +1808,7 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
   
 
   * `filter` takes a callback function as an argument and iterates over the elements of the array. During each iteration - it invokes the callback function using the value of the current element as an argument. 
+    
     * If the callback returns a truthy value - `filter` appends the element's value to a new array.
       * `filter` examines the return value of the callback on each iteration.
     * Otherwise - it ignores the element's value and does nothing.
@@ -1781,7 +1846,7 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
     let strings = ['a', 'b', 'c', 'd'];
     strings.reduce((accumulator, element) => {
       return accumulator + element.toUpperCase()
-    }, '');
+    }, ''); // ABCD
     ```
 
     
@@ -1801,7 +1866,7 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
 
     
 
-* `every` - takes a callback function. Executes the callback function once for each element in the array until one callback returns a falsy value. If such an element is found `every` method immediately returns `false`. Otherwise, returns `true`. It looks at the truthiness of the callback's return value. If all of the callback's return value in every iteration is truthy then `every` returns `true`
+* `every` - takes a callback function. Executes the callback function once for each element in the array until one callback returns a falsy value. If such an element is found, `every` method immediately returns `false`. Otherwise, returns `true`. It looks at the truthiness of the callback's return value. If all of the callback's return value in every iteration is truthy then `every` returns `true`
 
   ```javascript
 [1, 2, 3].every(num => num > 2) // false
@@ -1809,7 +1874,7 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
 
   
 
-* `find` - method take a callbackback function as an argument and returns the first element for which the callback function returns a truthy value:
+* `find` - takes a callbackback function as an argument and returns the first element for which the callback function returns a truthy value:
 
   ```javascript
   [2, 1, 4, 3, 5].find(num => num > 2) // 4
@@ -1830,22 +1895,22 @@ const foo3 = a => 2 * a; // this is a valid function that takes in one argument.
   ```javascript
 [2, 1, 4, 3, 5].findIndex(num => num > 2) // 2
   
-// If no truthy value is returned for any of the elements
+  // If no truthy value is returned for any of the elements
   [2, 1, 4, 3, 5].findIndex(num => num < 1) // -1
   ```
-  
-  
+
+
 
 * `reverse` method reverses the order of the elements of the array it is called on. It also mutates the array. 
 
   ```javascript
 let nums = [1, 2, 3];
-  nums.reverse(); // => [3, 2, 1]
+nums.reverse(); // => [3, 2, 1]
 nums;           // => [3, 2, 1]
   ```
+
   
-  
-  
+
 * `includes` method does not take a callback argument - instead - it takes an argument that it looks for in the array used to call it - it returns `true` when the argument exists in the array and `false` when it does not.
 
   ```javascript
@@ -1854,7 +1919,7 @@ nums;           // => [3, 2, 1]
 
   
 
-  * Doesn't really work for objects - You might expect a return value of `true` from the `includes` call above, but it returns `false`. That's because `includes` uses the `===` operator to compare its argument with elements of the array. Since the comparison `{c: 'foo'} === {c: 'foo'}` returns `false`, `arr.includes({c: 'foo'})` also returns `false` in the above example.
+  * Doesn't really work for objects - You might expect a return value of `true` from the `includes` call below, but it returns `false`. That's because `includes` uses the `===` operator to compare its argument with elements of the array. Since the comparison `{c: 'foo'} === {c: 'foo'}` returns `false`, `arr.includes({c: 'foo'})` also returns `false` in the above example.
 
     ```javascript
     let arr = ['a', 'b', {c: 'foo'}];
@@ -1881,7 +1946,7 @@ nums;           // => [3, 2, 1]
 
   * `typeof [1, 2, 3]` returns `'object'`.
 
-  * As a consequence if you need to detect whether a variable **references** an object - you need to use `Array.isArray`:
+  * As a consequence if you need to detect whether a variable **references** an array - you need to use `Array.isArray`:
 
     ```javascript
     let arr = [1, 2, 3];
@@ -1892,7 +1957,7 @@ nums;           // => [3, 2, 1]
 
 * Weird JS Array Behaviors:
 
-  * If you change an array's `length` property to a new, smaller vlaue, the array gets truncated. JavaScript removes all elements beyond the new final element.
+  * If you change an array's `length` property to a new, smaller value, the array gets truncated. JavaScript removes all elements beyond the new final element.
 
     ```javascript
     let arr = [1, 2, 3];
@@ -1904,6 +1969,8 @@ nums;           // => [3, 2, 1]
     
 
   * If you change an array's length to a larger value - the array expands to the new size - however, the new elements do not get initialized. 
+
+    * Why does unset array elements return `undefined`.
 
     ```javascript
     let arr = [];
@@ -1922,7 +1989,7 @@ nums;           // => [3, 2, 1]
 
     
 
-    * JS treats unset array elements as missing but `length` property includes the unsert elements.
+    * JS treats unset array elements as missing but `length` property includes the unset elements.
 
   * You can create array "elements" with indexes that use negative or non-integer values or even non-numeric values:
 
@@ -1943,7 +2010,7 @@ nums;           // => [3, 2, 1]
 
   * Since array are objects - you can actually use `Object.keys` method to return an array's keys. Even negative and non-integer indexes are included. 
 
-  * There is a difference in having `undefined` in an array versus unset elements returning `undefined`. The unset values are set to `undefined` by JavaScript as an after effect of calling another method.
+  * There is a difference in having `undefined` in an array versus unset elements returning `undefined`. **The unset values are set to `undefined` by JavaScript as an after effect of calling another method.**
 
     ```javascript
     // unset values
@@ -1992,7 +2059,7 @@ nums;           // => [3, 2, 1]
 
   
 
-  * There is no right answer on what is considered "empty">? - It's a decision you have to make depending on what you are working on. 
+  * There is no right answer on what is considered "empty" - It's a decision you have to make depending on what you are working on. 
 
 * Sparse arrays - you can have array elements that are not set (meaning they don't actually exist):
 
@@ -2013,7 +2080,7 @@ nums;           // => [3, 2, 1]
   console.log(Object.keys(arr))  // ['0', '1', '2', '4']
   ```
 
-  * There is a difference between an unset element returning `undefine` and an element actually containing `undefined`
+  * There is a difference between an unset element returning `undefined` and an element actually containing `undefined`
 
   * Creates ambiguity in what arrays are empty and which are not:
 
@@ -2099,7 +2166,7 @@ numbers.splice(0, numbers.length);
   // Method 3
   // Loops until numbers.length === 0; 0 is a falsy value so evaluates to false
   while (numbers.length) {
-  numbers.pop();
+  	numbers.pop();
   }
 
   // Remove one element
@@ -2107,6 +2174,83 @@ numbers.splice(2, 1); // removes "3" from the array
   ```
   
   
+  
+* `sort`
+
+  * Destructive - use `slice()` if you need to maintain original array
+
+  * When `sort` is called without arguments it coerces all the array elements except those that are `undefined` to their string equivalents then sorts them using string comparisons
+  
+    ```javascript
+    [2, 11, 9, 4, 107, 21, 1].sort() //.[ 1, 107, 11, 2, 21, 4, 9 ]
+  [null, 'a', true, 1].sort() // [ 1, 'a', null, true ]
+    ```
+
+    
+  
+  * `undefined` is always placed at the end of the array no matter what the other values are:
+  
+  ```javascript
+    [undefined, 11, 'z', 'x', 'y', undefined].sort() // [ 11, 'x', 'y', 'z', undefined, undefined ]
+  ```
+  
+  
+  
+  * When working with strings that have multiple characters, `sort` compares them character by character, so the strings beginning with `a` come before those beginning with `b`; if both characters are the same, then the next character in each string is compared, and so on. If one string is shorter than another, but equal through the length of the shorter string, then the shorter string comes before the longer one. For instance, `'cap'` is shorter than `'cape'`, so `'cap'` comes first in the result.
+  
+    ```javascript
+  ['arc', 'bat', 'cape', 'ants', 'cap'].sort() // [ 'ants', 'arc', 'bat', 'cap', 'cape' ]
+    ```
+
+    
+
+  * The string order is determined by a character's code point in the UTF-16 encoding. It is the code point that determines the result when we compare one character with another using the relational operators.
+  
+    ```javascript
+    'A' < 'a' // 65 < 97 true
+    ```
+  
+    
+
+    * Uppercase letters come before lowercase letters (sometimes called **ASCIIbetical** order)
+  * Digits and most punctuation come before letters.
+  
+* There are several punctuation characters between the uppercase and lowercase letters, and several more that come after all of the letters.
+  
+  * `sort` takes an optional callback argument. The return value of that callback determines the final sequence produced by the sort. 
+  
+    ```javascript
+    [2, 11, 9, 4, 107, 21, 1].sort((a, b) => a - b)
+    ```
+  
+    
+  
+    * The `sort` function iterates over our array and supplies our callback function with two elements each time. It arranges the relative positions of the two elements by:
+    * If the callback returns a number less than 0, place `a` before `b`.
+    * If the callback returns a number greater than 0, place `b` before `a`
+    * If the callback returns 0, leave them unchanged
+  
+    ```javascript
+    let words = ['go', 'ahead', 'and', 'jump'];
+    words.sort((a, b) => a.length - b.length);
+    
+    ```
+  
+    
+  
+  * Other examples:
+  
+    ```javascript
+    let scores = [[3, 6, 4], [6, 8, 9], [1, 4, 2]];
+    scores.sort((a, b) => {
+      let totalAScore = a.reduce((number, next) => number + next);
+      let totalBScore = b.reduce((number, next) => number + next);
+    
+      return totalAScore - totalBScore;
+    });
+    ```
+  
+    
   
 * Other Array Methods
 
@@ -2126,67 +2270,42 @@ numbers.splice(2, 1); // removes "3" from the array
 
       
 
-  * `sort` method is handy way to rearrange the elements of an array (destructive)
-
-    ```javascript
-    let a = [5, 3, 8, 2, 4, 1];
-    a.sort();
-    ```
-
-    
-
   * `slice` method extracts and returns a portion of the array. Takes two optional arguments - the first is the index at which extraction begins while the second is where extraction ends. Also not destructive
 
     ```javascript
     let fruits = ['mango', 'orange', 'banana', 'pear', 'apple'];
     fruits.slice(1, 3); // ['orange', 'banana']
-    
     fruits.slice(2) // second argument defaults to rest of array
-    fruits.slice() // duplicates array  [ 'mango', 'orange', 'banana', 'pear', 'apple' ]
+     fruits.slice() // duplicates array  [ 'mango', 'orange', 'banana', 'pear', 'apple' ]
     ```
-
-    
-
-  * `shift` & `unshift`:
-
-    ```javascript
-    let numbers = [1, 2, 3, 4, 5];
-    let reversedArray = [];
-    
-    numbers.forEach((number) => {
-      // unshift adds element to the front of the array.
-  reversedArray.unshift(number);
-    });
-    
-    console.log(reversedArray); // [5, 4, 3, 2, 1]
-    console.log(numbers); // [1, 2, 3, 4, 5]
-    ```
-    
-    
-    
-  * `slice`: Takes in two arguments. `start` - the index at which to start changing the array. `deleteCount` - optional - indicating the number of elements in the array to remove from start
   
-    * If `deleteCount` is omitted - the default behavior is to delete all elements from `start` to the end of the array.
-    
-    ```javascript
-    let numbers = [1, 2, 3, 4, 5];
-    numbers.splice(2, 1);
-    console.log(numbers); // [1, 2, 4, 5]
-    ```
+
+* `shift` & `unshift`:
+
+  ```javascript
+  let numbers = [1, 2, 3, 4, 5];
+  let reversedArray = [];
+  numbers.forEach((number) => {
+  	// unshift adds element to the front of the array.
+    reversedArray.unshift(number);
+  });
+  
+  console.log(reversedArray); // [5, 4, 3, 2, 1]
+  console.log(numbers); // [1, 2, 3, 4, 5]
   ```
-    
-    
-    
-  * `reverse` - reverses the order of an array and it is destructive. You can use `slice` with no arguments if you don't want to mutate the original array
-  
-    ```javascript
-    let numbers = [1, 2, 3, 4];
-    let reversedNumbers = numbers.slice().reverse();
-    reversedNumbers; // [ 4, 3, 2, 1 ]
-    numbers; // [1, 2, 3, 4]
-  ```
-  
-    
+
+   * `splice()`
+
+     ```javascript
+     let numbers = [1, 2, 3, 4, 5];
+     numbers.splice(2, 1); // splice returns the removed elements in an array - [3]
+     console.log(numbers); // [1, 2, 4, 5]
+     
+     numbers.splice(); // this is not destructive? Why?
+     console.log(numbers); // [1, 2, 4, 5]
+     ```
+
+     
 
 ### Objects
 
@@ -2709,6 +2828,102 @@ numbers.splice(2, 1); // removes "3" from the array
     // steve's name has 5 letters in it.
     // Something went wrong
     // frank's name has 5 letters in it.
+    ```
+
+    
+
+* Shallow Copy
+
+  * When you need to copy an entire collection - to, for example, save the original collection before performing some modifications.
+
+  * Ways to copy array:
+
+    ```javascript
+    let arr = ['a', 'b', 'c'];
+    let copyOfArr = arr.slice();
+    copyOfArr; // => [ 'a', 'b', 'c' ];
+    copyOfArr.push('d');
+    copyOfArr; // => [ 'a', 'b', 'c', 'd' ]
+    arr;  // => [ 'a', 'b', 'c' ]
+    
+    let arr2 = ['a', 'b', 'c'];
+    let copyOfArr2 = [...arr];
+    copyOfArr2; // => [ 'a', 'b', 'c' ];
+    ```
+
+    
+
+  * Only the top level array is copied - when the array contains other objects like nested array, then those objects are shared - not copied. 
+
+    ```javascript
+    let arr = [['a'], ['b'], ['c']];
+    let copyOfArr = arr.slice();
+    
+    copyOfArr[1].push('d');
+    
+    arr;       // => [ [ 'a' ], [ 'b', 'd' ], [ 'c' ] ]
+    copyOfArr; // => [ [ 'a' ], [ 'b', 'd' ], [ 'c' ] ]
+    ```
+
+    
+
+    * This behavior occurs because the destructive method `push` was called on a shared object, `['b']` rather than a separate array. When you mutate a shared object in an array or other collection - it is the shared object you are affecting rather than the collection
+
+  * What about objects? Changes to nested objects within the copy will be reflected in the original
+
+    ```javascript
+    let obj = { a: { b: 'foo' }, c: ['bar'] };
+    let copyOfObj = Object.assign({}, obj);
+    
+    copyOfObj['c'] = 'baz';
+    copyOfObj; // => { a: 'foo', b: 'bar', c: 'baz' }
+    obj;       // => { a: 'foo', b: 'bar' }
+    
+    obj['a']['d'] = 'baz';
+    copyOfObj; // => { a: { b: 'foo', d: 'baz' }, c: [ 'bar' ] }
+    obj;       // => { a: { b: 'foo', d: 'baz' }, c: [ 'bar' ] }
+    ```
+
+    
+
+* Deep Copy
+
+  ```javascript
+  let arr = [{ b: 'foo' }, ['bar']];
+  let serializedArr = JSON.stringify(arr);
+  let deepCopiedArr = JSON.parse(serializedArr);
+  
+  deepCopiedArr[1].push('baz');
+  deepCopiedArr; // => [ { b: 'foo' }, [ 'bar', 'baz' ] ]
+  arr;           // => [ { b: 'foo' }, [ 'bar' ] ]
+  
+  ```
+
+  
+
+* Freezing Objects
+
+  * Objects can be frozen using the `Object.freeze` function to prevent objects from being modified 
+
+    ```javascript
+    let obj = Object.freeze({ a: 'foo' });
+    let arr = Object.freeze(['a', 'b', 'c']);
+    
+    obj['b'] = 'bar';
+    obj; // => { a: 'foo' }
+    
+    arr.push('d'); // => TypeError: Cannot add property 3, object is not extensible
+    arr; // => [ 'a', 'b', 'c' ]
+    ```
+
+  * Only mutable objects can be frozen with `Object.freeze` - since immutable objects like `String` are already frozen. We can check whether an object is frozen with `Object.isFrozen`.
+
+  * `Object.freeze` only freezes the object that is passed to it. If the object passed to it contains other objects - those objects will not be frozen. For example, if we have a nested array, the nested objects can still be modified after passing it to `Object.freeze`.
+
+    ```javascript
+    let arr = Object.freeze([[1], [2], [3]]);
+    arr[2].push(4);
+    arr; // =>  [ [ 1 ], [ 2 ], [ 3, 4 ] ]
     ```
 
     

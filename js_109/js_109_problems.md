@@ -924,3 +924,45 @@ console.log(arr);
 * We are calling `map` on the array `['ant', 'bear']` on line 1. `map` takes in a callback function as its argument. It iterates through the array, and for each element `map` invokes the callback function once. Then it takes the return values of the callback function to construct a new array which `map` returns after it finishes looping. It is not a destructive method - it returns a new array of the same size. It uses the return values as the new elements in the new array. 
 * As `map` iterates through the array, it passes the element to the argument `elem`. Then the callback function takes `elem` and accesses the `length` property and if it is greater than `3` - callback function with return the back the same value. 
   * Since `'ant'.length` is not > 3 - `map` will output `[undefined, 'bear']`. Since there was no explicit return value when `elem.length` was not `> 3`, in those cases, callback function returns `undefined`.
+
+
+
+
+
+### Practice Problems: Lesson 5 Working with Collections
+
+[https://launchschool.com/lessons/778acada/assignments/a2ba7936]
+
+
+
+#### Problem 1 (Question 6)
+
+```javascript
+[{ a: 'ant', b: 'elephant' }, { c: 'cat', d: 'dog' }].filter(object => {
+  return Object.keys(object).every(key => object[key][0] === key);
+});
+```
+
+* We use the array `[{ a: 'ant', b: 'elephant' }, { c: 'cat', d: 'dog' }]` to call `filter`. `filter` takes a callback as an argument. Each element of the array is passed to the callback function and assigned to the parameter `object`. `filter` then invokes the callback function once per element. `filter` returns a new array that only contains the elements where the callback function returned a truthy value.
+* Inside the callback function we use `Object.keys(object)` to call `every` function. `every` function, like `filter`, takes a callback function as an argument. It iterates through the array and invokes the callback function once per element. Unlike `filter`, `every` returns `false` if one of the callback function invocations returns a falsy value (immediately ends the loop). If all of the callback function invocations returns a truthy value, `every` returns `true`.
+* On the first invocation, we pass `{ a: 'ant', b: 'elephant' }` to the callback function. Then we call `Object.keys()` by passing in the argument `object`. This returns `['a', 'b']`. `every` then loops over this array passing each element's value to the parameter `key`. We then use the element reference operator `[]` to access `object`'s values using the argument as the key. Then we use an additional reference operator to access the first index of the value returned by `object[key]` which in this case is a string so we would get back `a` then on the next iteration `b`.
+* We take this value (`object[key][0]`) and compare it agains the argument `key`. If they are equal to each other, the single statement callback will return `true` - if not, `false`. On the first iteration of `filter`,  `every` returns `false` since `b` is not equal to `e`. On the second iteration of `filter`, `every` returns `true`.
+* As mentioned above `filter` returns a new array that only contains the elements where the callback function returned a truthy value. On the first iteration, it returned a falsy value (`false`) and on the second iteration, it returned a truthy value (`true`). It get back `[{ c: 'cat', d: 'dog' }]`.
+
+
+
+
+
+#### Problem 2 (Question 7)
+
+```javascript
+[[8, 13, 27], ['apple', 'banana', 'cantaloupe']].map(arr => {
+  return arr.filter(item => {
+    if (typeof item === 'number') {    // if it's a number
+      return item > 13;
+    } else {
+      return item.length < 6;
+    }
+  });
+});
+```

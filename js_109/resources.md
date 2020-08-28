@@ -23,82 +23,6 @@ Written Test Notes
 * Examples
 * Common mistakes 
   * Generally the problem is with the precision of language (no pseudocode)
-* Practice #1:
-  * What does this output? What does it return?
-    * `[[1, 2], [3, 4]]`
-    * [undefined, undefined]
-    * Returns a new array 
-  * What data structure is it?
-    * Nested array
-    * Uses map function
-      * Calls a callback function for each element from the array
-* Practice #2:
-  * What does this code return and why?
-    * Returns a new array: [undefined, bear]
-      * `map` returns the same length of the array
-    * For every element the call back function checks if the string's length is greater than 3
-      * Where does the callback function come in?
-        * You pass the element to the call back function (if (elem.length > 3)) {return elem;}
-    * The callback function only returns string's length that is greater than element
-    * `undefined` gets returned because nothing was returned - returns the `elem`
-  * Accepts the callback function as an argument
-    * Transforms the element based on the callback function
-    * **Look this up**
-  * Got to be more detailed.
-
-* Practice #3 with `filter`
-  * **Not based on return valule - based on whether the callback function evaluates to true**
-    * Really really look up what filter does
-    * Really understand what it's doing
-  * Accepts a callback function as an argument
-* Practice #4 
-  * You cannot know what the code will print until line 11
-    * It will not log anything unless you call it
-    * You have analyze where the function is called
-      * `undefined` - absence of value
-  * The order in which you explain the code matters
-  * It's variable scope
-    * Global variable scope
-    * `animal` in function -  is a parameter - local variable of the function `speak()`
-    * `animal` === undefined because no arguments were passed
-  * Variable shadowing
-    * You need to explain why `animal` in line 1 is not the same as `animal` in line 3 & 4
-    * Why is `animal` as a parameter `undefined` - we didn't pass in any value
-    * You don't need to explain the `else` part
-
-* Practice #5
-  * We initalize the variable `greeting` with "Hello"
-  * Order matters in explaning
-    * Line #1 we initialize `greeting`
-    * Until you invoke the function you don't have to explain anything. Pass in undefined the whole thing fails 
-    * So start from line 9
-      * You don't need to explain any of this
-        * We invoke `test` and pass in variable `greeting`
-        * We don't save the `.concat` - it does not mutate (can't mutate primitives)
-        * We don't save it anywhere
-        * We return the lowercase
-    * In line 10
-      * greeting will stay "Hello"
-      * You don't save save the returned string anywhere so the greeting is still "Hello"
-      * It doesn't mutate because it's a primitive (cannot be mutated)
-      * It remains unchanged
-  * A lot of people make this mistake
-    * We are calling `concat` method on `str` but we are not mutating `str` as strings are primitive values.
-      * We are calling `concat` method on the string assigned to `str` variable but we are not mutating that string as strings are primitive values
-    * We cannot call methods on variables but on Objects. We are calling methods on the values that are assigned to the variables.
-* Practice #6
-  * Start with initalize variable
-  * Start at line #8 test(greeting)
-    * We pass in greeting to test
-    * arr now references greeting
-      * with objects - Javascript is pass by reference
-    * Variables cannot point to other variables
-      * It points to the same object that `greeting` is pointed to `["Hello"]`
-    * **We reassign the Object which `greeting` and `arr` were pointing to with `arr.concat("World!")`** - reword this
-      * `arr` , we are reassigning with a new object `arr.concat("World!")`
-      * .concat is a non-mutating method
-
-
 
 
 
@@ -143,7 +67,6 @@ Interview Notes
 ### Books
 
 * https://launchschool.com/books/javascript - will be good to review to make sure if there are concepts covered there that I didn't cover and important to the written test
-* 
 
 
 
@@ -161,39 +84,39 @@ Interview Notes
 
 ### Content of the Written Exam
 
-- assignments and comparison
-  - Initial Draft Done (need follow-up)
+- assignments + reassignments
+  - Completed
+- comparison (control flow)
+  - Completed
 - variable scope, especially how variables interact with function definitions and blocks
-  - Initial Draft Done (refinement needed)
-- primitive values, types and type conversions
+  - Completed
+- **primitive values, types and type conversions**
   - Initial Draft Done (need follow-up)
-  - I am not sure how much type conversions we need to know - worth reading through the JS101
+  - **I am not sure how much type conversions we need to know - worth reading through the JS101**
 - how passing an argument into a function may or may not permanently change the value that a variable contains or points to
-  - Initial Draft Done (need follow-up)
+  - Completed
 - working with Strings, Arrays, and Objects. In particular, you should be thoroughly familiar with the basic Array iteration methods (`forEach`, `map`, `filter`, and `find`) and how to use Object methods to access the keys and values in an Object as an Array.
-  - Initial Draft Done (refinement needed)
+  - Completed
 - understand that arrays are objects, and be able to determine whether you have an Array
-  - Initial Draft Done (refinement needed)
+  - Completed
 - understand the concepts of *pass-by-reference* and *pass-by-value*
-  - Initial Draft Done (need follow-up)
+  - Completed
 - [variables as pointers](https://launchschool.com/books/javascript/read/more_stuff#variablesaspointers)
   - Initial Draft Done (need follow-up)
 - [console.log vs return](https://launchschool.com/books/javascript/read/basics#expressionsandreturnvalues)
-  - Initial Draft Done (need refinement)
+  - Completed
 - truthiness: `false` and `true` vs. falsy and truthy
-  - Initial Draft Done (need follow-up) - dig into more resources online
+  - Completed
 - function definition and function invocation
-  - Initial Draft Done
-  - Definitely needs follow-up
+  - Completed
 - function declarations, function expressions, and arrow functions
-  - Initial Draft Done
-  - Definitely needs follow-up
+  - Completed
 - implicit return value of function invocations
-  - Initial Draft Done (need refinement)
-- **first-class functions**
-  - https://medium.com/predict/javascript-functions-vs-methods-and-other-helpful-tips-e58a621b1d27
-- **[side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)**
-  - Initial Draft Done (quick review)
+  - Completed
+- first-class functions
+  - Completed
+- [side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)
+  - Completed
 - **naming conventions (legal vs idiomatic)**
 
 
@@ -211,17 +134,18 @@ Interview Notes
    2. Review that notes cover all the major topics
    3. Will also serve as a reference when you take the exam
 4. Initial Start
-   1. Build Starter Examples
+   1. Build Starter Examples (Completed)
       1. Review the quizzes
       2. Review the exercises in JS101
-   2. Practice on codewars
-   3. Review notes
+   2. Practice on codewars - start (Completed)
+   3. Review notes (Completed)
 5. Refine the Notes
    1. Before I can refine - I need to start practicing and reading the notes and seeing if the notes are good enough
    2. Go through each lesson and read through areas where I am not familar and we need to add
       1. Really synthesize the different concepts into a succinct description of the different topics listed there
-   3. Add to areas where I am weak
-6. Go through each lesson and read through areas where I am not familar or I need to add
+   3. Go through the quizzes again?
+   4. Add to areas where I am weak
+6. Find more examples to walk through
 7. On Repeat
    1. Practice CodeWars
       1. Precise language
