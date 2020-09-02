@@ -1,3 +1,19 @@
+## Readiness
+
+
+
+Readiness for Written: It's getting there. I would say I am 50% - I think 3-4 weeks out. I took a lot of time to practice and get together notes.
+
+* **Review, Review, Review** - this is the most important thing you can do. 
+  * Review problems you did
+  * Review the notes
+  * Explain the concepts aloud
+* Go over:
+  * Implicit, Explicit
+  * Naming convention
+* Find problems to practice explaining (1 per day)
+
+
 
 ## Resources
 
@@ -123,7 +139,7 @@ Interview Notes
 
 ### Written Exam Plan
 
-1. Focus on 1 to 2 hours every day. Show up everyday to study and do consistent, quality work in every day. Even on days you do not necessary want to
+1. Focus on 1 to 2 hours every day. Show up everyday to study and do consistent, quality work every day. Even on days you do not necessary want to
 2. Attend Study Groups **(Completed)**
    1. Really understand what will be on the exam
    2. The format
@@ -134,19 +150,23 @@ Interview Notes
    2. Review that notes cover all the major topics
    3. Will also serve as a reference when you take the exam
 4. Initial Start
-   1. Build Starter Examples (Completed)
+   1. Build Starter Examples **(Completed)**
       1. Review the quizzes
       2. Review the exercises in JS101
-   2. Practice on codewars - start (Completed)
-   3. Review notes (Completed)
-5. Refine the Notes
+   2. Practice on codewars - start **(Completed)**
+   3. Review notes **(Completed)**
+5. Refine the Notes **(Completed)**
    1. Before I can refine - I need to start practicing and reading the notes and seeing if the notes are good enough
    2. Go through each lesson and read through areas where I am not familar and we need to add
       1. Really synthesize the different concepts into a succinct description of the different topics listed there
    3. Go through the quizzes again?
    4. Add to areas where I am weak
-6. Find more examples to walk through
-7. On Repeat
+6. **Find more examples to walk through**
+   1. Find more to practice in LS basics
+   2. Create your code examples for all the specific topics and practice answering what the code is doing in certain situations and what it is an example of
+7. Create pre-made snippets. Like explaining filter, map - you don't want to be doing that
+   1. So separate note for that
+8. On Repeat
    1. Practice CodeWars
       1. Precise language
    2. Practice Examples

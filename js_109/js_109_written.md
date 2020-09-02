@@ -2,7 +2,7 @@
 
 
 
-### Variable Assignments
+### Variable Assignments (assignment and reassignments)
 
 #### Key Concepts:
 
@@ -18,7 +18,7 @@
 
     * `let var = 0;`
 
-      * Variables declared with 'let' are limited to the scope of a block statement - if initialize in code block , cannot be accessed outside it.
+      * Variables declared with 'let' are limited to the scope of a block statement - if initialized in code block , cannot be accessed outside it.
 
     * `const var = 16;`
       
@@ -56,10 +56,20 @@
   console.log(c); // this will fail - ReferenceError
   ```
 
+  ```javascript
+function x() {
+    hello = 'boo';
+}
   
-
-  * One way to update/reassign variables?
-
+  x();
+  
+  console.log(hello); // will actually print 'boo'
+  ```
+  
+  
+  
+  * One way to update/reassign variables? Note that reassignment just changes what the variable references - does not mutate the value that it was referencing before
+  
     * `name = 'Patricia';`
 
 
@@ -187,7 +197,7 @@
       let number = 10;
       
       [1, 2, 3].forEach(number => {
-        console.log(number);
+        console.log(number); // Here the local variable number is shadowing outer scope variable number
       });
       ```
 
@@ -219,7 +229,7 @@
     * Things to note for primitives:
 
       * Primitive values are immutable values that get stored in a variable - unlike objects - we don't store pointers to the primitive values in the variable.
-    * Primitive values are always immutable - thus no matter what happens inside the function - the original value passed to the function never changes.
+    * **Primitive values are always immutable - thus no matter what happens inside the function - the original value passed to the function never changes.**
       
       * When we pass object into functions as arguments, we pass a pointer for the object into the function - when we pass primitive values as arguments - we pass copy of the primitive value. 
 
@@ -785,9 +795,6 @@
   * Statements always evaluate as `undefined` - they are not expressions and different in that you cannot use a statement as part of another expression:
 
 
-      * Initialized means a variable is declared and assigned a value
-
-
 ```javascript
 let foo; // this is a statement, it is declared but not initalized
 console.log(5 * let name); // This is not valid because `let name` is not an expression
@@ -809,7 +816,7 @@ console.log(let myNumber = 3 * 3); // This is not allowed
 
   ```javascript
   let foo = false; // returns undefined
-  let bar;
+  let bar; // returns undefined
   console.log(bar = false) // returns false and can be printed out
   ```
   
@@ -903,7 +910,7 @@ console.log(let myNumber = 3 * 3); // This is not allowed
 
 * Pass by Value
 
-  * Definition: Pass by value is when you pass a variable to a function call, that variable is not affected after the function gets executed no matter what the function does with it (think C)
+  * Definition: Pass by value means that when you use a variable to pass an argument to the function, the function cannot do anything that sets the original variable to a different value. No matter what happens in the function - the variable will still contain the same value that was passed to the function.
 
   * When you pass primitive values to functions - JavaScript is pass by value (they are immutable). No operation performed on a primitive value can permanently alter the value.
 
@@ -921,7 +928,7 @@ console.log(let myNumber = 3 * 3); // This is not allowed
       console.log(a); // 5
       
       function add2(a) {
-        a = a + a; // "a" here is a function local copy of "a" - not the global variable "a" we declared at the top.
+        a = a + a; // "a" here is a local copy of "a" - not the global variable "a" we declared at the top.
         console.log(a); // 10
       }
       
@@ -951,8 +958,9 @@ console.log(let myNumber = 3 * 3); // This is not allowed
 
     
 
-    * You can see above that passing the string to `changeName` did not change the contents of the `name` variable. Again think "C" here, we are not passing a pointer but the actual copy of the variable so nothing is changed.
-    * Passing a primitive variable to a function parameter means that we make a new local instance of the variable and copy the value - any changes that we make to the argument (when the function is invoked) will leave the original variable unaffected. 
+    * Note, first that, the code has two different `name` variables. One is in the scope of the `changeName` function while the other is in `anotherFunction`'s scope.  These two names are in separate scopes and have no direct relationship with each other. 
+    * You can see above that passing the string to `changeName` did not change the contents of the `name` variable. 
+    * Passing a primitive variable to a function parameter means that we make a new local instance of the variable and copy the value - any changes that we make to the argument (when the function is invoked) will leave the original variable unaffected. Reason for that is that primitive values are immutable
 
   * Another example:
 
@@ -1000,7 +1008,65 @@ console.log(let myNumber = 3 * 3); // This is not allowed
 
     
 
-* More references:  https://launchschool.com/books/javascript/read/more_stuff#variablesaspointers
+* Remember that reassignment is not a destructive operation:
+
+  ```javascript
+  function addName(arr, name) {
+    arr = arr.concat([name]);
+  }
+  
+  let names = ["bob", "kim"];
+  addName(names, "jim");
+  console.log(names); // => [ 'bob', 'kim', ]
+  ```
+
+  
+
+* Return value
+
+  * Values returned by functions can be pass-by-value or pass-by-reference as much as we saw with arguments
+
+    ```javascript
+    function foo(number) {
+      return number;
+    }
+    
+    let number = 1;
+    let newNumber = foo(number);
+    
+    function bar(array) {
+      return array;
+    }
+    
+    let array = [1, 2, 3];
+    let newArray = bar(array);
+    console.log(array === newArray); // true
+    ```
+
+    
+
+  * With the `foo` function - we are passing a primitive value `1` into the function. As with all primitive values - the value is passed by value, so `foo` recieves a copy of the original value. It then returns the value of the argument it received which is yet another new value. When all that code runs - both `number` and `newNumber` have a value of `1` but the two variables are not linked in any way - the values are different numbers that just happen to be equal
+
+  * In the `bar` function, we are passing an array `[1, 2, 3]` into the function. As with other arrays and objects, `bar` recieves a pointer to the array. it then returns another reference to the same array to the calling code. When all is done both `array` and `newArray` point to the same array in memory.
+
+* Assignments
+
+  ```javascript
+  number = 1;
+  newNumber = number; // is this pass by value? Yes
+  
+  array = [1, 2, 3];
+  newArray = array; // is this pass by reference? Yes
+  ```
+
+  
+
+  * Simple assignments in JavaScript work a lot like pass-by-value and pass-by-reference
+  * In the above code, `number` and `newNumber` have the same values but those values are distinct - if you increment one - it will not change the other. Thus, it looks a lot like pass-by-value
+  * Conversely, `array` and `newArray` point to the exact same array. If you use `array` to modify the array - the array reference by `newArray` also changes. Looks a lot like pass-by-reference
+  * The similarity is just for you. It is incorrect to speak of assingment in terms of pass-by-value or pass-by-reference. In JavaScript, those terms only apply when calling and returning from functions, not assignments. 
+
+* More references:  https://launchschool.com/lessons/64655364/assignments/33123902
 
 
 
@@ -1504,7 +1570,7 @@ console.log(let myNumber = 3 * 3); // This is not allowed
   
   * Functions can also mutate their arguments:
   
-    * This is a function with side effects so not pure
+    * This is a function with side effects - not a pure function
   
     ```javascript
     function changeFirstElement(array) {
@@ -1866,7 +1932,7 @@ console.log(let myNumber = 3 * 3); // This is not allowed
 
     
 
-* `every` - takes a callback function. Executes the callback function once for each element in the array until one callback returns a falsy value. If such an element is found, `every` method immediately returns `false`. Otherwise, returns `true`. It looks at the truthiness of the callback's return value. If all of the callback's return value in every iteration is truthy then `every` returns `true`
+* `every` - takes a callback function. Executes the callback function once for each element in the array until one callback returns a falsy value. If such an element is found, `every` method immediately returns `false`. Otherwise, returns `true`. It looks at the truthiness of the callback's return value. If all of the callback's return value in every iteration is truthy then `every` returns `true`.
 
   ```javascript
 [1, 2, 3].every(num => num > 2) // false
@@ -1970,7 +2036,7 @@ nums;           // => [3, 2, 1]
 
   * If you change an array's length to a larger value - the array expands to the new size - however, the new elements do not get initialized. 
 
-    * Why does unset array elements return `undefined`.
+    * Why does unset array elements return `undefined`?
 
     ```javascript
     let arr = [];
@@ -2122,7 +2188,7 @@ nums;           // => [3, 2, 1]
 
     * Assigning `a` to `b` merely makes `b` reference the same array as `a` - it does not create a new array.
 
-  * At first glance above, you might say that arrays in the first example are also "the same array" - but they are not. They are two different arrays that happen to have the same values. However, they occupy distinct positinos in memory so they are not the same array - and thus not equal
+  * At first glance above, you might say that arrays in the first example are also "the same array" - but they are not. They are two different arrays that happen to have the same values. However, they occupy distinct positions in memory so they are not the same array - and thus not equal
 
   * If you want to check that the contents between two arrays are the same then you can create a function that does that:
 
@@ -2213,10 +2279,10 @@ numbers.splice(2, 1); // removes "3" from the array
     
 
     * Uppercase letters come before lowercase letters (sometimes called **ASCIIbetical** order)
-  * Digits and most punctuation come before letters.
-  
-* There are several punctuation characters between the uppercase and lowercase letters, and several more that come after all of the letters.
-  
+    * Digits and most punctuation come before letters.
+    
+    * There are several punctuation characters between the uppercase and lowercase letters, and several more that come after all of the letters.
+    
   * `sort` takes an optional callback argument. The return value of that callback determines the final sequence produced by the sort. 
   
     ```javascript
@@ -2254,22 +2320,6 @@ numbers.splice(2, 1); // removes "3" from the array
   
 * Other Array Methods
 
-  * `includes`
-
-    ```javascript
-    let a = [1, 2, 3, 4, 5];
-    a.includes(2); // true
-    ```
-
-    * `includes` uses `===` to compare elements of the array with the argument - that means that we cannot use `includes` to check for the existence of a nested array or an object:
-
-      ```javascript
-      let a = [1, 2, [3, 4], 5];
-      a.includes([3, 4]); // false
-      ```
-
-      
-
   * `slice` method extracts and returns a portion of the array. Takes two optional arguments - the first is the index at which extraction begins while the second is where extraction ends. Also not destructive
 
     ```javascript
@@ -2278,7 +2328,6 @@ numbers.splice(2, 1); // removes "3" from the array
     fruits.slice(2) // second argument defaults to rest of array
      fruits.slice() // duplicates array  [ 'mango', 'orange', 'banana', 'pear', 'apple' ]
     ```
-  
 
 * `shift` & `unshift`:
 
@@ -2356,7 +2405,7 @@ numbers.splice(2, 1); // removes "3" from the array
 
   
 
-  * Note that there are two ways of referencing an element in an object. The first one is called the **dot notation** of object property access and the second one is the **bracket notation**. In the above example, we use the dot notation to access the value of the `'fruit'` key and the bracket notation to access the value of the `'vegetable'` key. It is important to note that the `[0]` part of `obj['vegetable'][0]` and `[3]` in `obj.fruit[3]` in the above example is string element reference. The string `'carrot'` is returned by `object['vegetable']` and `[0]` is used to access the first letter of that value.
+  * Note that there are two ways of referencing an element in an object. The first one is called the **dot notation** and the second one is the **bracket notation**. In the above example, we use the dot notation to access the value of the `'fruit'` key and the bracket notation to access the value of the `'vegetable'` key. **It is important to note that the `[0]` part of `obj['vegetable'][0]` and `[3]` in `obj.fruit[3]` in the above example is string element reference.** The string `'carrot'` is returned by `object['vegetable']` and `[0]` is used to access the first letter of that value.
 
   * Accessing a key that doesn't exist:
 
@@ -2411,7 +2460,7 @@ numbers.splice(2, 1); // removes "3" from the array
 
     
 
-  * With `const` declaration, we are prohibited from changing whtat thing the `const` points to - but it does not prohibit changing the content of that thing.
+  * With `const` declaration, we are prohibited from changing what thing the `const` points to - but it does not prohibit changing the content of that thing.
 
     ```javascript
     const MyObj = { foo: "bar", qux: "xyz" };
@@ -2485,9 +2534,14 @@ numbers.splice(2, 1); // removes "3" from the array
           console.log(obj2[prop]);
         }
       }
+      
       ```
 
+    Object.keys(obj2) // ['c', 'd']
+      ```
       
+      
+      ```
 
   * `Object.keys` static method returns an object's keys as an array. You can iterate over that array using any technique that works for arrays.
 
@@ -2628,7 +2682,7 @@ numbers.splice(2, 1); // removes "3" from the array
   // if you want to return certain sections of the string you can provide the starting index and the end index
   let munstersDescription = "the Munsters are CREEPY and Spooky.";
   munstersDescription.charAt(0).toUpperCase() +
-    munstersDescription.substring(1).toLowerCase();
+    munstersDescription.slice(1).toLowerCase();
   ```
 
 * Useful examples:
@@ -2724,6 +2778,8 @@ numbers.splice(2, 1); // removes "3" from the array
 
 * `continue`:
 
+  * The `continue` statement terminates the execution of the statements in the current iteration of the current or labeled loop and continues execution of the loop with the next iteration
+
   ```javascript
   let names = ['Chris', 'Kevin', 'Naveed', 'Pete', 'Victor'];
   let upperNames = [];
@@ -2743,6 +2799,8 @@ numbers.splice(2, 1); // removes "3" from the array
 
 * `break` - for cases where you might want to skip the remaining iterations:
 
+  * `break` statement terminates the current loop 
+  
   ```javascript
   let array = [3, 1, 5, 9, 2, 6, 4, 7]
   let indexOfFive = -1;
@@ -2753,9 +2811,9 @@ numbers.splice(2, 1); // removes "3" from the array
       // adding break here stops the loop from runnning after it finds 5
       break;
     }
-  }
+}
   ```
-
+  
   
 
 
