@@ -78,7 +78,7 @@ console.log(greeting);
 
 * My interpretation:
   * On line one, we initialize variable `greeting` with the value `'Hello'`
-  * One line 3 to 6, we have a `while` loop and a `{}` indicating a code block. Within the loop, we are reassigning `greeting` with the value `Hi`. Since, there is no local variable `greeting` in the block scope, JavaScript will look outside of the code block and finds the outer scope variable `greeting` that contains `'Hello'` and uses this for reassignment. This is one of the main rules of variable scoping. Inner scope variables can access outer scope variables. After the reassignment, we call `break` which terminates the current loop. 
+  * On line 3 to 6, we have a `while` loop and a `{}` indicating a code block. Within the loop, we are reassigning `greeting` with the value `Hi`. Since, there is no local variable `greeting` in the block scope, JavaScript will look outside of the code block and finds the outer scope variable `greeting` that contains `'Hello'` and uses this for reassignment. This is one of the main rules of variable scoping. Inner scope variables can access outer scope variables. After the reassignment, we call `break` which terminates the current loop. 
   * On line 8, we call `console.log` and pass in the value of `greeting`. This outputs to console the value `'Hi'` .
 * LS interpretation:
   * The global variable `greeting` is assigned to the string `'Hello'` on line 1. Within the loop, lines 3 to 6 define a block within which `greeting` is reassigned to the string `Hi` on line 4. The loop stops running when it encounters the `break` on line 5. On line 8, `console.log` is called with value of the variable `greeting` passed to it as an argument
@@ -124,7 +124,7 @@ if (a) {
 * My interpretation:
   * On line 1 - we initialize a variable called `a` with the value `"Hello"`.
   * On line 3 - we have an `if` statement and `{}` code block from line 3 to 7. 
-    * `if` statement takes a condition - basically any expression that evaluates to true or false. In this code, we use `a` as the condition. In JavaScript, non-empty strings will always evaluate to true - thus, non-empty strings like `"Hello"` are considered truthy values but they are not the same as the boolean value of `true`. `if` condition only needs an expression that **can** evaluate to true or false
+    * `if` statement takes a condition - basically any expression that evaluates to true or false. In this code, we use the value of  `a` as the condition. In JavaScript, non-empty strings will always evaluate to true - thus, non-empty strings like `"Hello"` are considered truthy values but they are not the same as the boolean value of `true`. `if` condition only needs an expression that **can** evaluate to true or false
     * In this case, we are passing the value "Hello" and this is a truthy value. 
     * As a result, we will invoke `console.log('Hello is truthy');`. We pass the value `"Hello is truthy"` to `console.log`. `console.log` will take the argument and output it to the console.
     * The output to the console is: `'Hello is truthy'`. 
@@ -149,7 +149,7 @@ What does this output? What does it return
 
 * We call `map` function on the nested array structure `[[1, 2], [3, 4]]`. `map` function takes in one argument - a callback function. `map` iterates over each element of the array that it is called on and for each element, it invokes the call back function. 
 * `map` also returns a new array of the same size. The value of each element in the array however depends on the return value of the callback function. 
-* In this particular code, the callback function takes in the value of the element on each loop and invokes `console.log(arr[0])`. This will output: `1` and `3` (Uses `[]`  to access the first index of each element in the array - `arr[0`]). **Since `console.log()` returns `undefined` - the callback function here also returns `undefined`.** 
+* In this particular code, the callback function takes in the value of the element on each loop and invokes `console.log(arr[0])`. This will output: `1` and `3` (Uses `[]`  to access the first index of each element in the array - `arr[0]`). **Since `console.log()` returns `undefined` - the callback function here also returns `undefined`.** 
 * Once `map` function finishes looping the entire array, it will return a new array: [`undefined`, `undefined`] 
 
 
@@ -244,7 +244,7 @@ console.log(greeting);
 * On line 1, we initialize the variable `greeting` with value "Hello"
 * On line 2, we declare the function `test` that has one parameter `str`
 * On line 9, we invoke the function `test()` by passing to the function value of  `greeting` (`hello`). 
-  * In the execution of the execution (line 4): We call the method `concat(" World!")` on the value of `str`  - since strings are immutable (cannot mutate primitives like strings) - the value does not change and instead this expression `str.concat(" World!")` actually returns a new string (if we want to use it later we must save the return value in a variable).
+  * In the execution of the function (line 4): We call the method `concat(" World!")` on the value of `str`  - since strings are immutable (cannot mutate primitives like strings) - the value does not change and instead this expression `str.concat(" World!")` actually returns a new string (if we want to use it later we must save the return value in a variable).
     * Remember that we cannot call methods on variables but on the values that are assigned to the variables. 
   * Then we reassign local variable `str` with the return value of expression `str.toLowerCase()` which returns a new string that only contains lowercase letters.
     * At this point, we have `"hello"` in variable `str`
@@ -275,8 +275,8 @@ console.log(greeting);
 
 * On line 1: we initialize the variable `greeting` with the variable `["Hello"]`
 * On line 3: we declare the function `test` with parameter `arr`.
-* On line 8: we invoke the function `test` by passing to the argument value of `greeting`.
-  * `arr` now references `greeting` because in JavaScript objects are pass by reference
+* On line 8: we invoke the function `test` by passing to the argument, value of `greeting`.
+  * `arr` now references the same object as  `greeting` because in JavaScript objects are pass by reference
   * Then on line 4: we reassign argument `arr` with `arr.concat("World!")`. `concat` method is not destructive but instead returns a new array returning `["Hello", "World!"]`
     * Similar to `push` it adds the argument you passed to it at the end of the calling array.
     * Remember that `arr` was referencing the same array object as `greeting` - but after this reassignment it is now pointing to a new array object that contains `["Hello", "World!"]`. 
@@ -291,48 +291,6 @@ console.log(greeting);
 
 
 ### Quiz 2
-
-#### Problem 1 (question 3 in the quiz)
-
-The code below should print both message 50% of the time. What is the bug? Fix it and then answer what will this output & why? 
-
-
-
-```javascript
-let a = 2;
-let b = Math.floor(Math.random() * 2);
-a *= b;
-
-if (a = 2) {
-  console.log('The value of `a` is two.');
-} else {
-  console.log('The value of `a` is NOT two.');
-}
-```
-
-
-
-**Fixing the bug:**
-
-The bug is due to `a = 2` - this is an assignment statement. We are assigning `a` by `2` in the condition. Assignment statements return the value that we are reassigning the variable by. In other words, this reassignement expression returns `2`.
-
-Since - `2` in JavaScript evaluates to true (truthy value), it will only print The value of `a` is two.  So we need to change it to    `a === 2`.
-
-
-
-**Explanation:**
-
-We first declare and initialize variable `a` with the value of `2`. Then, on the following line, we declare and initalize variable `b` with `Math.floor(Math.random() * 2)`. `Math` is an object that has a variety of useful objects and static methods that we can leverage. `Math.floor` takes in a `Number` and it returns the largest integer less than or equal to the given `Number` (i.e. pass in `5.05` - you will get `5`). `Math.random` returns a random `Number` between 0 and 1. The multiplication by `2` makes sure that the range of values will be between `0` and `2`. 
-
-`Math.floor()` here will turn the resulting number into an integer less than or equal to the value returned by `Math.random() * 2`. The result of this is that you only get a value that is either `0` or `2`. 
-
-Then we reassign `a` by multiplying `a`  * `b` and reassigning the returned value of that multiplication.
-
-Depending on the value of `a`  whether it is `0` or `2`, it will print specific message. If `a = 0` then the code will output to the console `'The value of a is two.'`
-
-
-
-
 
 #### Problem 2 (question 9 in the quiz)
 
@@ -393,35 +351,6 @@ console.log(n = '1'); // '1'
 
 
 
-#### Problem 4 (question 19 in the quiz)
-
-What does it output and which variable names are in scope after the last line executes but before the program ends?
-
-```javascript
-let foo = 1;
-// Don't describe the function - it's not relevant until it is invoked
-function bar() {
-  let xyz = 3;
-  const qux = 5;
-  return qux;
-}
-
-const yam = function() {};
-console.log(bar());
-```
-
-
-
-**Explanation**
-
-* The first line - we are initializing a variable called `foo` with the value `1`.
-
-* Then we declare a function called `bar` and then `yam`.
-
-* On the last line - we invoke the function `bar()` which prints to the console the value `5` and returns `undefined`. `foo`, `bar`, `yam` are all in scope but the internal variables in `bar` are not. Once the function ends - the connection between `qux` and `5` ends and `qux` goes out of scope.
-
-
-
 ### Practice Problems: Easy 1
 
 #### Problem 1 (question 1 in Easy 1)
@@ -440,7 +369,7 @@ What does the code output below?
 * On line 1, we initialize variable `numbers` with array with three elements `[1, 2, 3]` - length of 3
 * We use the `[]` operator to access index 6 of `numbers` and assign the value `5`.  We know that from the code above that there is no index 6 in `numbers`. What happens next is that the `numbers` array is  expanded up to index 6. So the array `numbers` becomes:
   * `[1, 2, 3, <3 empty items>, 6]` - there are 3 empty items because these are elements in `numbers` that have not be set yet. 
-* Then on the final line of the code - we call `console.log(numbers[4]);`. Since the index `4` is not set - `numbers[4]` evaluates to `undefined` and as a result, this line of code outputs `undefined` to the console and `console.log(numbers[4]);` also returns `undefined`
+* Then on the final line of the code - we call `console.log(numbers[4]);`. Since the index `4` is not set - `numbers[4]` returns `undefined` and as a result, this line of code outputs `undefined` to the console and `console.log(numbers[4]);` also returns `undefined`
 
 
 
@@ -461,12 +390,12 @@ console.log(statement1.split('').filter(char => char === 't').length
 * So on the first line, we initialize `statement1` with the string `"The Flintstones Rock!"`.
 * Then on the second statement, we call `console.log()` - we pass in the expression `statement1.split('').filter(char => char === 't').length` . `console.log()` will output to the console the value that expression evaluates to.
   * This is an example of method chaining that allows you to call methods on the return value of another method.
-  * Breaking down the expression: we call `split('')` on the string value of `statement1`. `split('')` effectively turns the string into an array based on the delimiter. Since the delimiter passed in was an empty string, each element in the array will be the individual characters in the string (i.e. `['T', 'h', 'e'...]` ).
+  * Breaking down the expression: we call `split('')` on the string value of `statement1`. `split('')` effectively separates the string into an array based on the delimiter. Since the delimiter passed in was an empty string, each element in the array will be the individual characters in the string (i.e. `['T', 'h', 'e'...]` ).
   * Then taking the return value of `split('')` which is a new array, we call `filter(char => char === 't')`.
-    * `filter()` function takes in a callback function as an argument - it effectively loops over each element and for each element, calls the callback function. `filter()` returns a new array (not destructive) for all the elements where the callback function returns a truthy value. 
-    * In this case, since `char === 't'` (single expression so it is implicitly returned) evaluates to either a boolean `true` or `false`, it will evaluate to true only for elements where character was exactly `'t'`. Since this is also a strict comparison operator, each character must be exactly `'t'` in both data type and value. `filter()` returns `['t', 't']`
+    * `filter()` function takes in a callback function as an argument - it effectively loops over each element and for each element, calls the callback function. `filter()` returns a new array for all the elements where the callback function returns a truthy value. 
+    * In the body of the callback function, we have  `char === 't'` (single expression in arrow functions without braces are implicitly returned) which evaluates to either a boolean `true` or `false`.  This expression will evaluate to true only for elements where character was exactly `'t'` since this is also a strict comparison operator, each character must be exactly `'t'` in both data type and value. As a result,  `filter()` , at the end of the final iteration, returns `['t', 't']`
       * https://riptutorial.com/javascript/example/17665/implicit-return
-    * Then we use the return value of `filter()` which returns a new array to access its property `length` and returns the the number of elements in the array. Finally, the `console.log()` takes the return value of `length` to the console which is: `2`.
+    * Then we use the return value of `filter()` , a new array, to access its property `length` and returns the the number of elements in the array. Finally, the `console.log()` takes the return value of `length` to the console which is: `2`.
 
 
 
@@ -505,8 +434,8 @@ console.log(str1)
 **Explanation:**
 
 * On the first line, we initialize the value `str1` with the string value `"hello there"`.
-* On the second line, we initialize the value `str2` with the value of `str1`. With primitive values like `String`, it is important to note that `str2` and `str1` do not contain the same `String`. With primitive values, JavaScript is strictly pass by value - it always passes a copy of the string. Thus, line 2 assigns `str2` a new string that happens to be a copy of `str1`.  
-* On the third line, we reassign `str2` with a new string value of `"goodbye!"`.  There is no impact on `str1` because again strings are immutable and copy of the string was passed when initializing `str2` . 
+* On the second line, we initialize the value `str2` with the value of `str1`. With primitive values like `String`, it is important to note that `str2` and `str1` do not contain the same `String` - they are not linked in any way - they just happen to have the same value. With primitive values, JavaScript always passes a copy of the string. Thus, line 2 assigns `str2` a new string that happens to be a copy of `str1`.  
+* On the third line, we reassign `str2` with a new string value of `"goodbye!"`.  There is no impact on `str1` because strings are immutable and copy of the string was passed when initializing `str2` . 
 * On the final line, `console.log()` is invoked and we pass it the value of `str1`. It outputs to console `"hello there"`. 
 
 
@@ -530,16 +459,15 @@ console.log(arr1);
 
 **Explanation:**
 
-* On line one, we initialize variable `arr1` with an array with 5 elements and a mix of objects and integers.
+* On line one, we initialize variable `arr1` with an array with 5 elements - it is a mix of objects and integers.
 * On line two, we initialize variable `arr2` with a copy of `arr1` by utilizing `slice()` method with no arguments passed into it.
-  * At this point `arr1` and `arr2` are pointing to two different objects
-* On line three, we access index 0 of `arr2` . Then we access the property `first ` of `arr[0]` using the dot notation. We reassign  `arr2[0].first` with value `42`. This is a mutates the object - meaning now `arr2` contains: `[{ first: 42 }, { second: "value2" }, 3, 4, 5]`. 
-  * Note also that since `slice()` is a shallow copy - `arr1[0]` and `arr2[0]` point to the same object `{first: "value1"}`. 
+  * At this point `arr1` and `arr2` are pointing to two different objects however because `slice()` is a shallow copy - note that the objects within these arrays are shared between `arr1` and `arr2`
+* On line three, we access index 0 of `arr2` . Then we access the value at key `first ` of `arr1[0]` using the dot notation. We reassign  `arr2[0].first` with value `42`. This mutates the underlying object because `arr1[0]` and `arr2[0]` point to the same object `{first: "value1"}`. 
   * Thus, when we replace the value of the `first` in that object by using `arr2`, the changes shows up in `arr1` as well
 * As a result when we call `console.log(arr1);`, it prints:
   * `[{ first: 42 }, { second: "value2" }, 3, 4, 5]`
 * On line 6, we access index 1 element using the bracket notation `arr2[1]` and reassign it with value 50. 
-  * Since `arr1` and `arr2` are pointing to two separate array objects, in this case, this reassignment only impacts `arr1`.  You are no longer mutating the object in index 0 but reassigning it with a different value
+  * Since `arr1` and `arr2` are pointing to two separate array objects, in this case, this reassignment only impacts `arr1`.  You are no longer mutating the object at index 0 but reassigning it with a new value
   * So when we call the next two `console.log()` we get:
     * ` [{ first: 42 }, 50, 3, 4, 5 ]`
     * `[{ first: 42 }, { second: 'value2' }, 3, 4, 5 ]`
@@ -573,9 +501,9 @@ munstersDescription.split("").map(function(char) {
 * On line 1: we initialize the variable `munstersDescription` and assign it with the value `"The Munsters are creepy and spooky."`
 * On line 3, we call the method `split("")` on the value of `munstersDescription`. `split` takes in one parameter called `separator` used to split the string into a list of substrings. `split` returns a new array, and in this case: `["T", "h", "e"...]` (because an empty string denotes to `split` that the split happens on every character of the string ). Then on that return value, we call `map` method.
 * `map` method takes in a callback function. It iterates through every element of the array, and for each element, invokes the callback. `map` returns a new array of the same size and adds the return value of the callback function into the new array which `map` returns at the end of the loop. 
-  * Here, on iteration 1, value `"T"` is passed to the callback. Inside the callback, there an `if` statement with the following expression passed to the `condition` of `if` statement: `char === char.toUpperCase()`. If the passed in argument `char` is an uppercase - this expression will evaluate to true and the callback will return `char.toLowerCase()` which `map` will place into the new array. If not, callback returns `char.toUpperCase()`. 
+  * Here, on iteration 1, value `"T"` is passed to the callback. Inside the callback, there is an `if` statement with the following expression passed to the `condition` of `if` statement: `char === char.toUpperCase()`. If the passed in argument `char` is an uppercase - this expression will evaluate to true and the callback will return `char.toLowerCase()` which `map` will place into the new array. If not, callback returns `char.toUpperCase()`. 
   * At the end `map` returns an array of the same characters but with their cases flipped 
-* Finally on the last line we call `.join("")` on the return value of `map`. `join` method returns a new string by concatenating all of the elements in the array separated by a specified separator string in this case `""`. The final output is: 
+* Finally on the last line we call `.join("")` on the return value of `map`. `join` method returns a new string by concatenating all of the elements in the array separated by a specified separator in this case `""`. The final output is: 
 
 
 
@@ -642,10 +570,10 @@ console.log(answer - 8);
 
 * Line 1, we initialize variable `answer` with the value `42`.
 * Line 3, we declare the function `messWithIt` which takes in one argument (parameter called `someNumber`).
-* Then on line 7, we initialize variable called `newAnswer` and assign it the return value of the function `messWithIt(answer)`. Here, we invoke `messWithIt` and pass in the value of `answer` (value of `42`). 
+* Then on line 7, we initialize variable called `newAnswer` and assign it the return value of the function `messWithIt(answer)`. Here, we invoke `messWithIt` and pass in the value of `answer`  (`42`). 
+  * Also note that `someNumber` is a local variable scoped to the function `messWithIt` . At this point the value it references is `42` but note that it is not the same `42` that is referenced in `answer`. They are completely separate values that are not linked in any way. This is because `Number` is a primitive value (immutable). So when we pass a primitive value into a function as an argument - only a copy of the value is passed to the function - pass by value.
   * Then within the function, `messWithIt` takes the argument `someNumber` and adds `8` to it and the function returns the sum of `someNumber`  and  `8` which is `50`
-* On line 9, we call `console.log()` , `console.log()` outputs to console the evaluated value of the expression `answer - 8`.  It prints out `34` to the console.
-  * The reason is because `Number` is a primitive value (immutable). So when we pass a primitive value into a function as an argument - original value we passed to the function can never be changed (only a copy is passed to the function - pass by value) which is why `34` was printed and not `42`. 
+* On line 9, we call `console.log()` , `console.log()` outputs to console the evaluated value of the expression `answer - 8`.  It prints out `34` to the console - the reason is due to what was mentioned above - primitive values are immutable and pass by value (whatever we do inside the function cannot mutate the value in `answer`) and thus - global variable `answer` remains unchanged. 
 
 
 
@@ -680,16 +608,16 @@ What will happen to the `munsters` object?
 
 * So in the first line we initialize a variable `munster` with an object that contains five key-value pairs
 * On line 9 - we are declaring `messWithDemographics()` function that takes in a parameter called `demoObject`.
-* Then on line 16, we invoke the function `messWithDemographics` and we pass in the value of `munsters` variable.
-  * Once we invoke `messWithDemographics(munsters)`, the following happens in the function.
-  * First, we call `Object.values()` (takes in an object and returns the values of each key-value pair in the object as an array) on argument `demoObject` which now points to the same object `munster` variable points to. This returns an array of values from the object: `[32, 30, 402, 10, 23]`. 
+* Then on line 16, we invoke the function `messWithDemographics` and we pass in the value of `munsters` variable. 
+  * Once we invoke `messWithDemographics(munsters)`, the following happens in the function. The local variable `demoObject` now references the same object as `munster` variable
+  * First, we call `Object.values()` (takes in an object and returns the values of each key-value pair in the object as an array) on argument `demoObject` . This returns an array of values from the object: `[{ age: 32, gender: "male" }, { age: 30, gender: "female" } ...]` (all values not included - just shows the first two elements). 
   * Then we call `forEach` on the returned array value. `forEach` takes in a callback function and for each element it loops through, it calls the callback function. `forEach` also returns `undefined`.
     * In each callback function call, it takes the `familyMember` argument and does the following operations:
       * `familyMember["age"] += 42;`
         * It reassigns the value associated with the key `age` by taking the current value in `age` key and adding `42` to it.
       * `familyMember["gender"] = "other";`
-        * Here - we are accessing `gener` key for each element and reassigning the value with `"other"`
-    * The key thing to note here is that this actually mutates the underlying object that `munsters` and argument `demoObject` was pointing to because objects are passed by reference. The above operations directly accessed the same object using `age` and `gender` key and changed the object's values.
+        * Here - we are accessing `gener` key for each element and reassigning the value associated with that key with the value `"other"`
+    * The key thing to note here is that this actually mutates the underlying object that `munsters` and argument `demoObject` was pointing to because objects are passed by reference. The above operations directly accessed the same objects using `age` and `gender` key and changed the object's values.
 
 
 
@@ -713,12 +641,6 @@ console.log(bar(foo()));
 
 What will this code output?
 
-
-
-**I am having hard time explaining the operations of a function**
-
-
-
 **Explanation:**
 
 * On line 1 - we declare the function `foo` which takes in a parameter `param` and has a default value of `no`.
@@ -726,10 +648,10 @@ What will this code output?
 * Then on line 9 - we call `console.log()`. `console.log()` will output to the console the evaluated value of the expression `bar(foo())`.
   * Unpacking the expression `bar(foo())`
     * We first invoke `bar()` - it takes in one argument and here we are passing to `bar()` - the return value of `foo()`. 
-      * `foo()` is then invoked. Since no argument was passed in - `foo()` will use the default value `no`. The function`foo()` will always return `"yes"`.
-    * Now `bar()` will use the return value of `yes` after invoking `foo()` .
-      * Next `bar()` uses `param` argument to check if it is `"no"` with a strict equal comparator. Since `param` currently holds the value of `"yes"`, the `bar()` function will return `"no"`.
-      * Uses a ternary operator for control flow
+      * `foo()` is then invoked. Since no argument was passed in - `foo()` will use the default value of `no`. The function`foo()` will always return `"yes"` (only contains `return "yes"`).
+    * Now `bar()` will use the return value of `foo()` - which is `"yes"` .
+      * Next `bar()` checks whether the value of the local variable `param`  is `"no"` with a strict equal comparator. Since `param` currently holds the value of `"yes"`, the `bar()` function will return `"no"`.
+      * Also uses a ternary operator for control flow
 
 
 
@@ -815,17 +737,17 @@ What will the following code print out?
 
 * On line 1: function `messWithVars` is declared - takes in three arguments.
 * On line 7 through 9 - we declare three variables.
-* On line 11, we invoke the function `messWithVars` and we pass to the function values of the following function parameters: `one`, `two`, and `three`
-  * Inside the function now:
-    * We reassign argument `one` with the value of  argument `two`
-    * We reassign argument `two` with the value of  argument `one`
+* On line 11, we invoke the function `messWithVars` and we pass to the function,  values of the following global variables: `one`, `two`, and `three`  to the parameters of the same name.
+  * Inside the function:
+    * We reassign argument `one` with the value of argument `two`
+    * We reassign argument `two` with the value of argument `one`
     * We reassign argument `three` with the value of argument `one`
   * Now:
     * `one` contains `["two"]`
     * `two` contains`["two"]`
     * `three` contains `["two"]`
   * Important concept here:
-    * Variable scoping. Note that the arguments `one`, `two`, and `three` are local variables scoped to the function. They are not the same as the global variables of the same name outside. There is variable shadowing going on here where within the function you can no longer access global variables of the same name because JavaScript will use the local variable `one` instead of global variable `two`. 
+    * Variable scoping. Note that the arguments `one`, `two`, and `three` are local variables scoped to the function. They are not the same as the global variables of the same name outside. There is variable shadowing going on here where you can no longer access global variables of the same name because JavaScript will use the local variable `one` instead of global variable `one`. 
     * So all we were doing was reassigning the local variables and not the global variables. Global variables remain unchanged
 * So when we call `console.log` lines 13 through 15 we get:
   * one is: one
@@ -858,7 +780,7 @@ console.log(`three is: ${three}`);
   * We reassign argument `one` with array `["two"]`
   * We reassign argument `two` with array `["three"]`
   * We reassign argument `three` with array `["one"]`
-* It's important to note that the `one`, `two`, and `three` in the function are not the global variables - they just share the same name. These are local variables scoped at the function scope. There is variable shadowing happening here where local variable of the function shadows the global variables (`one`, `two`, and `three`) preventing you from accessing the global variables.
+* It's important to note that the `one`, `two`, and `three` in the function are not the global variables - they just share the same name. These are local variables scoped at the function scope. There is variable shadowing happening here where local variables of the function shadows the global variables (`one`, `two`, and `three`) preventing you from accessing the global variables.
   * As a result, all we are doing here is reassigning the local variables
   * And once the function finishes its invocation - these local variables cease to exist and cannot be accessed from outside the function scope. 
 * As a result we still get the same output to the console because the global variables `one`, `two`, and `three` remain unchanged.
@@ -885,13 +807,11 @@ console.log(`three is: ${three}`);
 
 * The big difference now is that we use `splice` which is a destructive Array method.
   * `splice` takes in three arguments: starting index, how many elements from the start index to change, the new value that will replace the current value 
-* Since JavaScript is a pass by reference when passing objects to functions, they are mutable. When you call `one.splice(0, 1, "two")` - we are mutating the underlying object that local argument `one` and global variable `one` were both were pointing to. 
+* Since JavaScript is a pass by reference when passing objects to functions, mutating the argument can affect the original object. When you call `one.splice(0, 1, "two")` - we are mutating the underlying object that local argument `one` and global variable `one` were both were referencing. 
 * As a result, we get the following outputs to console:
   * one is: two
   * two is: three
   * three is: one 
-
-
 
 
 
@@ -981,10 +901,8 @@ console.log(`three is: ${three}`);
 
 **Explanation:**
 
-* On line 1, we invoke method `every` on array `[1, 2, 3]`. `every` takes in a callback function as an argument. It iterates through the elements in the array, calls the callback fuction on each element once, and checks whether the return value of the callback function is a truthy or falsy value. If, in one of the invocations of the callback function returns a falsy value -- `every` immediately retuns `false`. If, no falsy value is returned after looping through all of the elements in the array, `every` returns `true`.
-* In this case, the value of each element in `[1, 2, 3]` is passed in as the argument to the callback function. Then the callback function takes the argument (`num`) and reassigns `num` with the expression `num * 2` . In JavaScript, assignment is an expression that **evaluates as the expression on the right-hand side of the assignment** and that is being returned. So in this case, it returns `num * 2`. So as an example, in the first iteration, `1` is passed to the callback function and the callback function returns `2`. Since non-zero integers are truthy values, `every` will return `true`.
-
-
+* On line 1, we invoke method `every` on array `[1, 2, 3]`. `every` takes in a callback function as an argument. It iterates through the elements in the array, calls the callback fuction on each element once, and checks whether the return value of the callback function is a truthy or falsy value. If one of the invocations of the callback function returns a falsy value -- `every` immediately retuns `false`. If, no falsy value is returned after looping through all of the elements in the array, `every` returns `true`.
+* In this case, the value of each element in `[1, 2, 3]` is passed in as the argument to the callback function. Then the callback function takes the argument (`num`) and reassigns `num` with the expression `num * 2` . In JavaScript, assignment is an expression that **evaluates as the expression on the right-hand side of the assignment**. So in this case, it returns `num * 2`. So as an example, in the first iteration, `1` is passed to the callback function and the callback function returns `2` (`1 * 2`). The subseuqent return values of the callback are: `4`, `6`. Since non-zero integers are truthy values, `every` will return `true`.
 
 
 
@@ -1000,9 +918,9 @@ console.log(arr);
 
 
 * On line 1, we initialize variable `arr` with the value `[1 ,2, 3, 4, 5]`
-* On line 2, we call method `fill` on the array value of `arr`. `fill` method changes all elements in an array to a static value.  `fill` takes in one argument and two optional arguments. The first argument is the value that you want to fill the array with. The next two optional arguments are start index and end index - allowing you to set where you want to start filling the static value and where you want to stop
+* On line 2, we call method `fill` on the array value of `arr`. `fill` method changes elements in an array to a static value.  `fill` takes in one argument and two optional arguments. The first argument is the value that you want to fill the array with. The next two optional arguments are start index and end index - allowing you to set where you want to start filling the static value and where you want to stop
   * `fill` is also a destructive method (it will change the calling array)
-* In this case, `fill` will replace the elements in `arr` with the value `1` starting from index 1 and up to index 5. This will create an array that is: `[1, 1, 1, 1, 1]`
+* In this case, `fill` will replace the elements in `arr` with the value `1` starting from index 1 and up to index 5. This will create an array that is: `[1, 1, 1, 1, 1]` - note that since this is a destructive method - it will change the underlying object leading to the array that `arr` is referencing to be mutated. 
 * When we call `console.log` on line 4, it will output to the console `[1, 1, 1, 1, 1]`
 
 
@@ -1018,8 +936,8 @@ console.log(arr);
 ```
 
 * We are calling `map` on the array `['ant', 'bear']` on line 1. `map` takes in a callback function as its argument. It iterates through the array, and for each element `map` invokes the callback function once. Then it takes the return values of the callback function to construct a new array which `map` returns after it finishes looping. It is not a destructive method - it returns a new array of the same size. It uses the return values as the new elements in the new array. 
-* As `map` iterates through the array, it passes the value of the element to the argument `elem`. Then the callback function takes `elem` and accesses the `length` property and if the length value is greater than `3` - callback function with return the back `elem`. 
-  * On the first invocation, for example, `elem` is `ant`. Since `'ant'.length` is not > 3 - `map` will output `undefined`.  Since there was no explicit return value when  `elem.length` was not `> 3`.  But since `bear.length` is greater than 3 `map` returns the following array: `[undefined, 'bear']`. 
+* As `map` iterates through the array, it passes the value of the element to the argument `elem`. Then the callback function takes `elem` and accesses the `length` property and if the value is greater than `3` - callback function with return back the value of `elem`. 
+  * On the first invocation, for example, `elem` references `ant`. Since `'ant'.length` is not > 3 - `map` will output `undefined` - since there was no explicit return value when  `elem.length` was not `> 3`.  But since `bear.length` is greater than 3 `map` returns the following array: `[undefined, 'bear']`. 
 
 
 
@@ -1041,9 +959,9 @@ console.log(arr);
 
 * We use the array `[{ a: 'ant', b: 'elephant' }, { c: 'cat', d: 'dog' }]` to call `filter`. `filter` takes a callback as an argument. Each element of the array is passed to the callback function and assigned to the parameter `object`. `filter` then invokes the callback function once per element. `filter` returns a new array that only contains the elements where the callback function returned a truthy value.
 * Inside the callback function we use `Object.keys(object)` to call `every` function. `every` function, like `filter`, takes a callback function as an argument. It iterates through the array and invokes the callback function once per element. Unlike `filter`, `every` returns `false` if one of the callback function invocations returns a falsy value (immediately ends the loop). If all of the callback function invocations returns a truthy value, `every` returns `true`.
-* On the first invocation, we pass the value `{ a: 'ant', b: 'elephant' }` to the callback function. Then we call `Object.keys()` by passing in the argument `object`. This returns `['a', 'b']`. `every` then loops over this array passing each element's value to the parameter `key`. We then use the element reference operator `[]` to access `object`'s values using the argument as the key. Then we use an additional reference operator to access the first index of the value returned by `object[key]` which in this case is a string so we would get back `a` then on the next iteration `b`.
-* We take this value (`object[key][0]`) and compare it agains the argument `key`. If they are equal to each other, the single statement callback will return `true` - if not, `false`. On the first iteration of `filter`,  `every` returns `false` since `b` is not equal to `e`. On the second iteration of `filter`, `every` returns `true`.
-* As mentioned above `filter` returns a new array that only contains the elements where the callback function returned a truthy value. On the first iteration, it returned a falsy value (`false`) and on the second iteration, it returned a truthy value (`true`). It get back `[{ c: 'cat', d: 'dog' }]`.
+* On the first invocation, we pass the value `{ a: 'ant', b: 'elephant' }` to the callback function. Then we call `Object.keys()` by passing in the vaule of the local variable `object`. This returns `['a', 'b']`. `every` then loops over this array passing each element's value to the parameter `key`. We then use the element reference operator `[]` to access `object`'s values using the argument as the key. Then we use an additional reference operator to access the first index of the value returned by `object[key]` which in this case is a string so we would get back `a` then on the next iteration `b`.
+* We take this value (`object[key][0]`) and compare it agains the argument `key`. If they are equal to each other, the single statement expression will return `true` - if not, `false`. On the first iteration of `filter`,  `every` returns `false` since `b` is not equal to `e`. On the second iteration of `filter`, `every` returns `true`.
+* As mentioned above `filter` returns a new array that only contains the elements where the callback function returned a truthy value. On the first iteration, it returned a falsy value (`false`) and on the second iteration, it returned a truthy value (`true`). It returns `[{ c: 'cat', d: 'dog' }]`.
 
 
 
@@ -1069,8 +987,8 @@ Explanation
   * Inside the callback function, `return` statement is called on the return value of `arr.filter()`. `filter` takes a callback as an argument. Each element of the array is passed to the callback function and assigned to the parameter `object`. `filter` then invokes the callback function once per element. `filter` returns a new array that only contains the elements where the callback function returned a truthy value.
   * So in this case, on the first invocation, value `[8, 13, 27]` is passed in as the argument to `map`. Then in the callback function of `map` - we call `filter` on `[8, 13, 27]`.  We pass the value of each element `8`, `13`, and `27`. We invoke the filter's callback each time on these arguments.
   * For the first iteration of `filter`, we pass in value `8` to the parameter `item`. `if` statement checks whether the arugment `item` is a number - if so `return item > 13`. In this case since `8 > 13` evaluates to false - the first callback invocation returns `false`.  For the subsequent values `13` and `27` - returns `false`, `true` respectively. 
-  * The return value of the `map`'s callback as a result `[27]` (remember that `filter` only adds to the newly returned array for truthy values)
-  * On the second invocation of `map`:  value of `['apple', 'banana', 'cantaloupe']` is passed. `filter` then is called on this array. Since the elements are not number - in the `if` statment inside the `filter`'s callback, it will return: `item.length < 6`. For example, `apple` - since it is less than 6 will return `true` . However, `'banana'` and `'cantaloupe'` will return `false`.
+  * The return value of the `map`'s callback as a result is `[27]` (remember that `filter` only adds to the newly returned array for truthy values)
+  * On the second invocation of `map`:  value of `['apple', 'banana', 'cantaloupe']` is passed. `filter` then is called on this array. Since the elements are not numbers - in the `if` statment inside the `filter`'s callback, it will return: `item.length < 6`. For example, `apple` - since it is less than 6 will return `true` . However, `'banana'` and `'cantaloupe'` will return `false`.
     * `filter` will return `['apple']`
 * The final return value is: `[[27], ['apple']]`.
 

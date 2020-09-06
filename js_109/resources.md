@@ -2,7 +2,7 @@
 
 
 
-Readiness for Written: It's getting there. I would say I am 50% - I think 3-4 weeks out. I took a lot of time to practice and get together notes.
+Readiness for Written: It's getting there. I would say I am 50% - I think 3-4 weeks out (targeting weekend of 09/25). I took a lot of time to practice and get together notes.
 
 * **Review, Review, Review** - this is the most important thing you can do. 
   * Review problems you did

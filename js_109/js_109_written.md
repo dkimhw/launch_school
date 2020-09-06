@@ -38,10 +38,12 @@
       console.log(b); // prints 2
       ```
 
+    
+
   * **Always declare variables with `let` and `const`. JavaScript has bizarre rules when working with undeclared variables. The most notable one is that all undeclared variables are global variables no matter where this undeclared variable was created. They ignore block and function scope.**
 
     * What does this mean?
-
+  
   ```javascript
   if (true) {
     a = 1; // undeclared variable - operates at the global scope
@@ -53,13 +55,13 @@
     let c = 3;
   }
   
-  console.log(c); // this will fail - ReferenceError
+console.log(c); // this will fail - ReferenceError
   ```
 
   ```javascript
 function x() {
     hello = 'boo';
-}
+  }
   
   x();
   
@@ -355,7 +357,7 @@ function x() {
 
 * Primitives & Variables
 
-  * Reassigning a value does not affect any other variables that happen to have the same value. This is why `b` remains unchanged. `a` and `b` are independent - changing one does not affect the other
+  * Reassigning a value does not affect any other variables that happen to have the same value. This is why `b` remains unchanged. `a` and `b` are independent - reassigning one does not affect the other
   * Variables that have primitive values store those values in the variable. When you assign a new value to a variable, JavaScript changes the variable's content to the new value.
 
   ```javascript
@@ -2537,20 +2539,14 @@ numbers.splice(2, 1); // removes "3" from the array
       
       ```
 
-    Object.keys(obj2) // ['c', 'd']
-      ```
-      
-      
-      ```
-
   * `Object.keys` static method returns an object's keys as an array. You can iterate over that array using any technique that works for arrays.
-
+  
     ```javascript
     let person = {
       name: 'Bob',
-      age: 30,
+    age: 30,
       height: '6 ft'
-    };
+  };
     
     let personKeys = Object.keys(person); // returns ['name', 'age', 'height']
     
@@ -2559,19 +2555,19 @@ numbers.splice(2, 1); // removes "3" from the array
     // 30
     // 6 ft
     ```
-
+  
     
-
+  
   * Order of the object's keys is not guaranteed
-
+  
   * `Object.values` - same as `Object.keys` but only returns array of values
 
   * `Object.entries` - returns the keys and values in a nested array format:
 
     ```javascript
-    let person = { name: 'Bob', age: 30, height: '6ft' };
+  let person = { name: 'Bob', age: 30, height: '6ft' };
     console.log(Object.entries(person));
-    // logs [[ 'name', 'Bob' ], [ 'age', 30 ], [ 'height', '6ft' ]]
+  // logs [[ 'name', 'Bob' ], [ 'age', 30 ], [ 'height', '6ft' ]]
     ```
 
     ```javascript
@@ -2579,9 +2575,9 @@ numbers.splice(2, 1); // removes "3" from the array
     Object.entries(flintstones).filter(pair => pair[0] === "Barney").shift();
     
     ```
+  
     
-    
-
+  
 * `Object.assign` - takes objects as arguments - can take multiple arguments. Mutates the first object:
 
   ```javascript
@@ -2925,7 +2921,7 @@ numbers.splice(2, 1); // removes "3" from the array
 
     
 
-    * This behavior occurs because the destructive method `push` was called on a shared object, `['b']` rather than a separate array. When you mutate a shared object in an array or other collection - it is the shared object you are affecting rather than the collection
+    * This behavior occurs because the destructive method `push` was called on a shared object, `['b']` rather than a separate array. **When you mutate a shared object in an array or other collection - it is the shared object you are affecting rather than the collection**
 
   * What about objects? Changes to nested objects within the copy will be reflected in the original
 
