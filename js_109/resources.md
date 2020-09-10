@@ -2,16 +2,64 @@
 
 
 
-Readiness for Written: It's getting there. I would say I am 50% - I think 3-4 weeks out (targeting weekend of 09/25). I took a lot of time to practice and get together notes.
+### 09.25! Let's Go
 
 * **Review, Review, Review** - this is the most important thing you can do. 
   * Review problems you did
   * Review the notes
-  * Explain the concepts aloud
-* Go over:
-  * Implicit, Explicit
-  * Naming convention
-* Find problems to practice explaining (1 per day)
+    * With emphasis on the topics that are difficult 
+  * For each concept - explain them aloud under resources.md
+* Plan for September Early
+  * **Review Notes again**
+    * While doing the notes do the "Go Over" part
+      1. Pass by ref
+      2. Naming convention - ask!
+  * **Then review the book for more problems & quick review**
+  * **Go over the quizzes**
+  * Then back to review cycle 
+
+
+
+### Content of the Written Exam
+
+- assignments + reassignments
+  - Completed
+- **comparison (control flow) - review please** 
+  - Completed
+- variable scope, especially how variables interact with function definitions and blocks
+  - Completed
+- **primitive values, types and type conversions**
+  - Initial Draft Done (need follow-up)
+  - **I am not sure how much type conversions we need to know - worth reading through the JS101**
+- how passing an argument into a function may or may not permanently change the value that a variable contains or points to
+  - Completed
+- working with Strings, Arrays, and Objects. In particular, you should be thoroughly familiar with the basic Array iteration methods (`forEach`, `map`, `filter`, and `find`) and how to use Object methods to access the keys and values in an Object as an Array.
+  - Completed
+- understand that arrays are objects, and be able to determine whether you have an Array
+  - Completed
+- **understand the concepts of *pass-by-reference* and *pass-by-value* - review please constantly - the hardest concept**
+  - Completed
+- **[variables as pointers](https://launchschool.com/books/javascript/read/more_stuff#variablesaspointers) -> review please constantly - hardest concept**
+  - Initial Draft Done (need follow-up)
+- [console.log vs return](https://launchschool.com/books/javascript/read/basics#expressionsandreturnvalues)
+  - Completed
+- truthiness: `false` and `true` vs. falsy and truthy
+  - Completed
+- function definition and function invocation
+  - Completed
+- function declarations, function expressions, and arrow functions
+  - Completed
+- implicit return value of function invocations
+  - Completed
+- first-class functions
+  - Completed
+- [side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)
+  - Completed
+- **naming conventions (legal vs idiomatic)**
+
+
+
+
 
 
 
@@ -98,48 +146,10 @@ Interview Notes
 
 
 
-### Content of the Written Exam
-
-- assignments + reassignments
-  - Completed
-- comparison (control flow)
-  - Completed
-- variable scope, especially how variables interact with function definitions and blocks
-  - Completed
-- **primitive values, types and type conversions**
-  - Initial Draft Done (need follow-up)
-  - **I am not sure how much type conversions we need to know - worth reading through the JS101**
-- how passing an argument into a function may or may not permanently change the value that a variable contains or points to
-  - Completed
-- working with Strings, Arrays, and Objects. In particular, you should be thoroughly familiar with the basic Array iteration methods (`forEach`, `map`, `filter`, and `find`) and how to use Object methods to access the keys and values in an Object as an Array.
-  - Completed
-- understand that arrays are objects, and be able to determine whether you have an Array
-  - Completed
-- understand the concepts of *pass-by-reference* and *pass-by-value*
-  - Completed
-- [variables as pointers](https://launchschool.com/books/javascript/read/more_stuff#variablesaspointers)
-  - Initial Draft Done (need follow-up)
-- [console.log vs return](https://launchschool.com/books/javascript/read/basics#expressionsandreturnvalues)
-  - Completed
-- truthiness: `false` and `true` vs. falsy and truthy
-  - Completed
-- function definition and function invocation
-  - Completed
-- function declarations, function expressions, and arrow functions
-  - Completed
-- implicit return value of function invocations
-  - Completed
-- first-class functions
-  - Completed
-- [side-effects and pure functions](https://launchschool.com/books/javascript/read/functions#sideeffects)
-  - Completed
-- **naming conventions (legal vs idiomatic)**
-
-
-
 ### Written Exam Plan
 
-1. Focus on 1 to 2 hours every day. Show up everyday to study and do consistent, quality work every day. Even on days you do not necessary want to
+Focus on 1 to 2 hours every day. Show up everyday to study and do consistent, quality work every day. Even on days you do not necessary want to
+
 2. Attend Study Groups **(Completed)**
    1. Really understand what will be on the exam
    2. The format

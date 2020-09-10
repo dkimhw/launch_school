@@ -25,9 +25,11 @@
 * Pass by Value
   * Definition: Pass by value means that when you use a variable to pass an argument to the function, the function cannot do anything that sets the original variable to a different value. No matter what happens in the function - the variable will still contain the same value that was passed to the function.
   * Second definition: Pass by value means that when we pass a primitive variable to a function parameter we make a new local instance of the variable and copy the value - any changes that we make to the argument (when the function is invoked) will leave the original variable unaffected. 
+  * Also note that `someNumber` is a local variable scoped to the function `messWithIt` . At this point the value it references is `42` but note that it is not the same `42` that is referenced in `answer`. They are completely separate values that are not linked in any way. This is because `Number` is a primitive value (immutable). So when we pass a primitive value into a function as an argument - only a copy of the value is passed to the function (pass by value).
 * Pass by Reference
   * When we pass object into functions as arguments, we pass a pointer for the object into the function - when we pass primitive values as arguments - we pass copy of the primitive value.
   * JavaScript is pass by reference and pass by value with objects (like array). When an operation within the function mutates its argument - it affects the original object
+  * Since JavaScript is a pass by reference when passing objects to functions, mutating the argument can affect the original object.
 * Primitive values
   * Primitive values are always immutable. No operation performed on a primitive value can permanently alter the value.
   * Remember that primitives are immutable - they don't have parts that one can change. Such values are said to be atomic. If a variable contains a primitive value - all you can do to that variable is use it in an expression or reassign it - gives it an entirely new value. Even `0 + 0` evaluates to a new value `0`.
@@ -95,4 +97,6 @@
   * When `sort` is called without arguments it coerces all the array elements except those that are `undefined` to their string equivalents then sorts them using string comparisons
 * `slice` method extracts and returns a portion of the array. Takes two optional arguments - the first is the index at which extraction begins while the second is where extraction ends. Also not destructive
 * Method chaining: This is an example of method chaining that allows you to call methods on the return value of another method
+* `split`
+  * On line 3, we call the method split("") on the value of munstersDescription. split takes in one parameter called separator used to split the string into a list of substrings. split returns a new array, and in this case: ["T", "h", "e"...] (because an empty string denotes to split that the split happens on every character of the string ). 
 
