@@ -7,16 +7,9 @@
 * **Review, Review, Review** - this is the most important thing you can do. 
   * Review problems you did
   * Review the notes
+    * Better - more organized snippets
     * With emphasis on the topics that are difficult 
-  * For each concept - explain them aloud under resources.md
-* Plan for September Early
-  * **Review Notes again**
-    * While doing the notes do the "Go Over" part
-      1. Pass by ref
-      2. Naming convention - ask!
-  * **Then review the book for more problems & quick review**
-  * **Go over the quizzes**
-  * Then back to review cycle 
+  * Naming conventions
 
 
 
