@@ -61,6 +61,11 @@ At the end of this second loop: 758
 
 But no shift since 758 is the lowest
 
+The way I was doing the shift was super, super complicated solution. I probably could have gotten it to a point
+where it worked but it was just not an ideal solution. I was working on the problem for 120 minutes.
+
+With the interview, I need to focus on getting to a simple, implementable solution.
+
 */
 
 function toArray(number) {
@@ -75,9 +80,7 @@ function compareDigits(number1, number2) {
     return false;
   }
 
-  let i;
-
-  for (i = 0; i < array1.length; i += 1) {
+  for (let i = 0; i < array1.length; i += 1) {
     if (array1[i] !== array2[i]) {
       return false;
     }

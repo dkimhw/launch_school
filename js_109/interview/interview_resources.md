@@ -77,11 +77,29 @@
         * This is the level of problems I will see so I really have to practice hard
   * Part 2:
     * https://ls-general-public.s3.amazonaws.com/watch_others_code_js/watch_others_code_2_js.mp4
+      * repeatedSubstringPattern is really, really hard
+        * I misunderstood the problem - that led me to a really wrong answer - stupid - need to be careful
+        * I also didn't fully understand the logic behind this problem. It was only after I sat down and really thought about the problem
+        * **Critical to understand the test cases fully before tackling the problem - this will be the part where I will most likely have the biggest issue** 
+      * Wow - these problems are really humbling. I am really realizing that I don't have a good grasp of problem solving as I really thought. Need to keep practicing.
   * Part 3:
     * https://ls-general-public.s3.amazonaws.com/watch_others_code_js/watch_others_code_js_3.mp4
   * Part 4:
     * https://ls-general-public.s3.amazonaws.com/watch_others_code_js/watch_others_code_js_4.mp4 
-* PEDAC 
+* JS 101 Small Problems (in tandem with codewars)
+  * Finish the rest of the problems
+    * You should be able to solve medium problems easily
+    * Medium problems are no jokes so you need to practice and study a lot
+  * Review from the start using PEDA
+* Practice on codewars and leetcode daily (in tandem with codewars)
+  * Practice coding aloud and explaining the concepts
+* Attend study group
+  * Live coding in front of TA and other students. Allows you to simulate the interview assessment.
+* **Cycle**
+  * Review JS 101 Problems
+  * Practice on codewars & leetcode daily
+  * Review problems that you struggled with
+* Review PEDAC (optional)
   * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
   * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
     * Problem
@@ -90,19 +108,6 @@
     * Data structures
     * Algo
   * https://launchschool.com/lessons/60e10aa5/assignments/d70a34e0
-* JS 101 Small Problems
-  * Finish the rest of the problems
-  * Review from the start using PEDA
-* Practice on codewars and leetcode daily
-  * Practice coding aloud and explaining the concepts
-* Attend study group
-  * Live coding in front of TA and other students. Allows you to simulate the interview assessment.
-* **Cycle**
-  * Review JS 101 Problems
-  * Practice on codewars & leetcode daily
-  * Review problems that you struggled with
-
-
 
 
 
