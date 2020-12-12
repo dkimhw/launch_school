@@ -84,9 +84,10 @@
       * Wow - these problems are really humbling. I am really realizing that I don't have a good grasp of problem solving as I really thought. Need to keep practicing.
   * Part 3:
     * https://ls-general-public.s3.amazonaws.com/watch_others_code_js/watch_others_code_js_3.mp4
+      * Review them again
   * Part 4:
     * https://ls-general-public.s3.amazonaws.com/watch_others_code_js/watch_others_code_js_4.mp4 
-* JS 101 Small Problems (in tandem with codewars)
+* **JS 101 Small Problems (in tandem with codewars)**
   * Finish the rest of the problems
     * You should be able to solve medium problems easily
     * Medium problems are no jokes so you need to practice and study a lot
@@ -99,6 +100,43 @@
   * Review JS 101 Problems
   * Practice on codewars & leetcode daily
   * Review problems that you struggled with
+* Methods to Review (find all the methods we need)
+  * Array
+    * `reverse`
+    * `forEach`
+    * `every`
+    * `some`
+    * `reduce`
+    * `find`
+    * `findIndex`
+    * `includes`
+    * `indexOf`
+      * What does this do?
+    * `map`
+    * `push`
+    * `pop`
+    * `shift`
+    * `splice`
+    * `fill`
+    * `filter`
+    * `concat`
+    * `sort`
+  * Strings
+    * `concat`
+    * `endsWith`
+    * `includes`
+    * `indexOf`
+      * What does it do?
+    * `charAt`
+    * `repeat`
+    * `replace`
+    * `split`
+  * Objects
+    * `hasOwnProperty`
+    * `Object.assign()`
+    * `Object.entries()`
+    * `Object.keys()`
+    * `Object.values()`
 * Review PEDAC (optional)
   * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
   * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.

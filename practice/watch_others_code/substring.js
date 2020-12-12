@@ -2,6 +2,8 @@
 
 /*
 
+Watch Others Code Part 3
+
 Understand the problem
 
 * Input: 2 strings - assume two strings
