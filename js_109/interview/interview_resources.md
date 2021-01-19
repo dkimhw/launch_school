@@ -92,6 +92,12 @@
     * You should be able to solve medium problems easily
     * Medium problems are no jokes so you need to practice and study a lot
   * Review from the start using PEDA
+  * Exercises to keep an eye on:
+    * Easy 1
+      * Exercise 9
+    * Easy 2
+      * Exercise 7 - good to review the operator logic
+    * 
 * **Practice on codewars and leetcode daily (in tandem with codewars)**
   * Practice coding aloud and explaining the concepts
 * Attend study group
