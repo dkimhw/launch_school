@@ -97,6 +97,16 @@
       * Exercise 9
     * Easy 2
       * Exercise 7 - good to review the operator logic
+      * Exercie 9
+      * Exercise 10
+        * Using helper functions to simplify
+      * Exercise 11
+        * Math.floor()
+        * do while
+        * Manipulation of digits using modulo
+      * Exercise 12
+        * Math.sign()
+        * Using helper functions
     * 
 * **Practice on codewars and leetcode daily (in tandem with codewars)**
   * Practice coding aloud and explaining the concepts
