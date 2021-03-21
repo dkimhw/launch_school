@@ -107,7 +107,11 @@
       * Exercise 12
         * Math.sign()
         * Using helper functions
-    * 
+    * Easy 3
+      * Exercise 4
+        * Fibonacci Function using do while
+        * BigInt
+      * 
 * **Practice on codewars and leetcode daily (in tandem with codewars)**
   * Practice coding aloud and explaining the concepts
 * Attend study group
