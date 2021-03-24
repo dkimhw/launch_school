@@ -87,7 +87,7 @@
       * Review them again
   * Part 4:
     * https://ls-general-public.s3.amazonaws.com/watch_others_code_js/watch_others_code_js_4.mp4 
-* **JS 101 Small Problems (in tandem with codewars)**
+* **JS 101 Small Problems**
   * Finish the rest of the problems
     * You should be able to solve medium problems easily
     * Medium problems are no jokes so you need to practice and study a lot
@@ -111,7 +111,18 @@
       * Exercise 4
         * Fibonacci Function using do while
         * BigInt
-      * 
+      * Exercise 7
+        * Comparing the two strings on left and right
+* **Review PEDAC**
+  * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
+  * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
+    * Problem
+      * Inputs, Outputs, Edge cases, specific rules that must be followed
+    * Examples
+    * Data structures
+    * Algo
+  * https://launchschool.com/lessons/60e10aa5/assignments/d70a34e0
+* **Watch Others Code Web Series Again**
 * **Practice on codewars and leetcode daily (in tandem with codewars)**
   * Practice coding aloud and explaining the concepts
 * Attend study group
@@ -159,15 +170,6 @@
       * `Object.entries()`
       * `Object.keys()`
       * `Object.values()`
-* Review PEDAC (optional)
-  * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
-  * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
-    * Problem
-      * Inputs, Outputs, Edge cases, specific rules that must be followed
-    * Examples
-    * Data structures
-    * Algo
-  * https://launchschool.com/lessons/60e10aa5/assignments/d70a34e0
 
 
 
