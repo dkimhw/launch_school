@@ -113,6 +113,10 @@
         * BigInt
       * Exercise 7
         * Comparing the two strings on left and right
+      * Exercise 9
+        * The use of clever if statements and logic (it pays to walk through problems to see if there are easier logical ways to solve this)
+      * Exercise 10
+        * Century problem - manipulating integers using modulo
 * **Review PEDAC**
   * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
   * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
