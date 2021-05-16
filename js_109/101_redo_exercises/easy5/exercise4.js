@@ -67,3 +67,39 @@ console.log(findDup([18,  9, 36, 96, 31, 19, 54, 75, 42, 15,
   85, 87, 51, 17, 66, 20, 28, 26,  2, 22,
   40, 23, 71, 62, 73, 32, 43, 24,  4, 56,
   7, 34, 57, 74, 45, 11, 88, 67,  5, 58]));    // 73
+
+
+/*
+function count(array, element) {
+  let count = 0;
+  for (let idx = 0; idx < array.length; idx++) {
+    if (array[idx] === element) {
+      count += 1;
+    }
+  }
+  return count;
+}
+
+function findDup(array) {
+  return array.find(element => count(array, element) === 2);
+}
+
+*/
+
+/*
+
+function findDup(array) {
+  let seen = {};
+
+  for (let idx = 0; idx < array.length; idx += 1) {
+    if (seen[array[idx]]) {
+      return array[idx];
+    } else {
+      seen[array[idx]] = true;
+    }
+  }
+
+  return undefined;
+}
+
+*/
