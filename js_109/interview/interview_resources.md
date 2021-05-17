@@ -125,7 +125,8 @@
       * Exercise 5
         * `toFixed`
         * Example of using reduce
-      * 
+      * **Exercise 11**
+      * **Exercise 12**
 * **Review PEDAC**
   * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
   * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
