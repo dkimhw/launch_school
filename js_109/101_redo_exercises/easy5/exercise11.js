@@ -1,5 +1,3 @@
-
-
 /*
 
 Problem:
@@ -42,12 +40,11 @@ let leftZeroPad = (int, len) => {
   let intLength = String(int).length;
 
   if (intLength < len) {
-    return '0'.repeat(len - intLength) + String(int);
+    return "0".repeat(len - intLength) + String(int);
   } else {
     return String(int);
   }
 };
-
 
 let timeOfDay = (mins) => {
   let hour;
@@ -55,15 +52,14 @@ let timeOfDay = (mins) => {
 
   if (mins >= 0) {
     hour = Math.floor((mins / 60) % 24);
-    minutes = mins -  (Math.floor((mins / 60)) * 60);
+    minutes = mins - (Math.floor(mins / 60) * 60);
   } else {
     hour = 24 + Math.floor((mins / 60) % 24);
-    minutes = mins -  (Math.floor((mins / 60)) * 60); 
+    minutes = mins - (Math.floor(mins / 60) * 60);
   }
 
   return `${leftZeroPad(hour, 2)}:${leftZeroPad(minutes, 2)}`;
 };
-
 
 console.log(timeOfDay(0) === "00:00");
 console.log(timeOfDay(-3) === "23:57");

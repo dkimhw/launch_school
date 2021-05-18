@@ -97,7 +97,7 @@
       * Exercise 9
     * Easy 2
       * Exercise 7 - good to review the operator logic
-      * Exercie 9
+      * Exercise 9
       * Exercise 10
         * Using helper functions to simplify
       * Exercise 11
@@ -127,6 +127,8 @@
         * Example of using reduce
       * **Exercise 11**
       * **Exercise 12**
+    * Easy 6
+      * 
 * **Review PEDAC**
   * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
   * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
