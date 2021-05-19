@@ -41,3 +41,4 @@ console.log(centerOf('Launch School'));     // " "
 console.log(centerOf('Launch'));            // "un"
 console.log(centerOf('Launchschool'));      // "hs"
 console.log(centerOf('x'));                 // "x"
+
