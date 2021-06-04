@@ -120,15 +120,16 @@
     * Easy 4
       * Exercise 9
     * Easy 5
-      * **Exercise 1**
+      * Exercise 1
       * Exercise 4 (Cool ways to use objects, use sort, use `find` )
       * Exercise 5
         * `toFixed`
         * Example of using reduce
-      * **Exercise 11**
-      * **Exercise 12**
+      * Exercise 11
+      * Exercise 12
     * Easy 6
-      * 
+    * List Processing
+      * Exercise 2
 * **Review PEDAC**
   * Make sure to review this concept again because you need to deconstruct the problem thoroughly before you can start coding
   * Don't do full PEDAC. Light PEDA. Under the algorithms, list out couple options before creating more detailed options.
