@@ -26,6 +26,7 @@ if so add the object to `inventoryItems`
 
 Step 3: Return `inventoryItems`
 
+
 */
 
 let transactions = [ { id: 101, movement: 'in',  quantity:  5 },
