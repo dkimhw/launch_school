@@ -43,7 +43,7 @@ Step 4: Return new rotated integer
 */
 
 let rotateRightmostDigits = (num, count) => {
-  let numArr = String(num).split('')
+  let numArr = String(num).split('');
   let lastElementIdx = numArr.length - 1;
   let swapElementIdx = numArr.length - 1;
 
